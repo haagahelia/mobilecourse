@@ -4,14 +4,20 @@ sidebar_position: 3
 ---
 
 ### View 
-**`View`** is container component that supports flexbox layout.
+- **`View`** is container component that supports flexbox layout.
+- It is used to group and structure other components within your application. 
 
 ```js
 import { View } from "react-native";
 
 return (
   <View style={styles.container}>
-    // Items
+    <View>
+      // Components
+    </View>
+    <View>
+      // Components
+    </View>
   </View>
 );
 ```
@@ -21,8 +27,9 @@ return (
 ---
 
 ### Text
-**`Text`** is component for displaying text.
+- **`Text`** is component for displaying text.
 
+#### Using the `Text` component:
 - Import the `Text` component from React Native.
 
 ```js
@@ -41,6 +48,7 @@ return (
 
 ### Button
 
+#### Using the `Button` component:
 - Import the `Button` component from React Native.
 
 ```js
@@ -68,9 +76,9 @@ const buttonPressed = () => {
 ![w:300 bg right](img/button.png)
 
 ### TextInput
+- `TextInput` component allows users to enter and edit single or multiline text.
 
-**`TextInput`** – component for text input
-
+#### Using the `TextInput` component:
 - Import the `TextInput` component from React Native.
 
 ```js
@@ -108,9 +116,9 @@ const buttonPressed = () => {
 ![w:250](img/textinput.png)
 
 ### Image
+- **`Image`** is component for displaying images
 
-**`Image`** – component for displaying images
-
+#### Using the `Image` component:
 - Import the `Image` component from React Native.
 
 ```js
