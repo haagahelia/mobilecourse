@@ -47,6 +47,7 @@ return (
 ```
 
 ### Button
+- `Button` component provides a basic button for user interaction
 
 #### Using the `Button` component:
 - Import the `Button` component from React Native.
@@ -139,3 +140,5 @@ source={{uri: 'IMAGE_URI'}}
 ```
 - `Image` component
   ![w:250](img/image.png)
+
+- You can find more core components in https://reactnative.dev/docs/components-and-apis
