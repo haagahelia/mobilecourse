@@ -1,5 +1,5 @@
 ---
-title: "Styling"
+title: "Styling & Flatlist"
 sidebar_position: 4
 ---
 - Most of the core components has a property called `style` that can be used for inline styling.
@@ -34,9 +34,7 @@ const styles = StyleSheet.create({
 ```
 
 ### Flatlist
-
-**`FlatList`** - list component with some nice features (header, footer, scroll etc.)
-
+- **`FlatList`** is list component with some nice features (header, footer, scroll etc.)
 - Import the `FlatList` component from React Native
 
 ```js

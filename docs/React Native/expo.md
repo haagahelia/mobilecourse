@@ -2,10 +2,10 @@
 title: "Expo"
 sidebar_position: 2
 ---
-- Easiest way to create a new React Native app is using **Expo**
+- Expo is a set of tools, libraries, and services for building React Native applications more easily and efficiently (https://expo.dev/).
 - Node.js LTS release version is required
 
-#### Create your first app
+### Create your first app
 - You can create a new React Native app using the following commands in terminal:
 ```bash
 npx create-expo-app YOUR_APP_NAME
