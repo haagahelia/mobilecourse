@@ -1,6 +1,6 @@
 ---
 title: "React Native API"
-sidebar_position: 5
+sidebar_position: 6
 ---
 - React Native provides some useful APIs that you can use in your apps, for example:
 
