@@ -44,4 +44,4 @@ import MapView, { Marker } from 'react-native-maps';
       title='Haaga-Helia' />
 </MapView>
 ```
-![w:300 bg right](img/map1.png)
+![](img/map1.png)
