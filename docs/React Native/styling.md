@@ -1,6 +1,6 @@
 ---
 title: "Styling"
-sidebar_position: 4
+sidebar_position: 5
 ---
 - Most of the core components has a property called `style` that can be used for inline styling.
 
