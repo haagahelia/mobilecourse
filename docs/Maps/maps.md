@@ -25,7 +25,26 @@ import MapView, { Marker } from 'react-native-maps';
   }} 
 />
 ```
-- **Note!** Use `region` prop instead of `initialRegion` when having region in state (dynamic map).
+:::info
+Use `region` prop instead of `initialRegion` when having region in state (dynamic map). For example,
+
+```jsx
+// Create a state for region
+const [region, setRegion] = useState({
+  latitude: 60.200692,
+  longitude: 24.934302,
+  latitudeDelta: 0.0322,
+  longitudeDelta: 0.0221,
+})
+
+// Use region prop in the MapView and the value comes from region state
+<MapView
+  style={{ flex: 1 }} 
+  region={region} 
+/>
+```
+:::
+
 - To show marker, add `Marker` inside the `MapView` component.
 
 ```jsx
