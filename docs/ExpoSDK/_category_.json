@@ -1,0 +1,8 @@
+{
+  "label": "Expo SDK",
+  "position": 7,
+  "link": {
+    "type": "generated-index",
+    "description": "The Expo SDK provides access to device and system functionality"
+  }
+}
