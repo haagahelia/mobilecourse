@@ -3,18 +3,23 @@ title: "Firebase"
 sidebar_position: 3
 ---
 - To use the Firebase realtime database (NoSQL) with React Native, you can use **Firebase JavaScript SDK** or **React Native Firebase**. In this material, we are using the JavaScript SDK.
-- Installation:
+### Installation
 ```bash
 npx expo install firebase
 ```
 - See also step 3: **Configure Metro** in https://docs.expo.dev/guides/using-firebase/
+### Shopping List
+- We will implement a simple Shopping list app where user can enter products (title and amount) and save them to the Firebase realtime database. Products are listed using the `FlatList` component. 
 
-- We will implement a simple Shopping list app where user can enter products (title and amount) and save them to the Firebase realtime database. Products are listed using the `FlatList` component. First, the following imports are needed
+#### Imports
+- First, the following imports are needed
 
 ```js
 import { initializeApp } from 'firebase/app';
 import { getDatabase, push, ref, onValue } from 'firebase/database';
 ```
+
+#### Create Firebase Project
 - Sign up to Firebase (https://firebase.google.com/).
 - Create a new Firebase project and create new realtime database (Build menu).
 - Add new App to you Firebase project (Web app). 
@@ -22,7 +27,6 @@ import { getDatabase, push, ref, onValue } from 'firebase/database';
 ![w:550](img/firebase_app.PNG) 
 
 - In the Realtime database, define your database rules for demo purposes: Database --> Rules tab
-
 ```json
  "rules": {
    ".read": true,
@@ -70,7 +74,7 @@ const saveItem = () => {
 }
 ```
 
-![w:260](img/items_collection.png)
+![](img/items_collection.png)
 
 - Data can be read by using `onValue` that listens for data changes in the Firebase realtime database.That triggers a callback each time the data changes and we get a current snapshot of our collection (in this case `items`)
 
@@ -86,7 +90,7 @@ useEffect(() => {
 ```
 - Finally, you can add `FlatList` component and render `items` state data.
 
-**Read More**
+### Read More
 - Firebase Realtime Database documentation: https://firebase.google.com/docs/database
 - Firebase Authentication: https://firebase.google.com/docs/auth
 - Supabase (Open source alternative to Firebase); https://supabase.com/ 
