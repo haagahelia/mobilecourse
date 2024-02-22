@@ -14,7 +14,7 @@ npx expo install expo-contacts
 import * as Contacts from 'expo-contacts';
 import * as SMS from 'expo-sms';
 ```
-- Next, we have to ask permission to be able to access the device’s contacts. 
+- Next, we have to check permission to be able to access the device’s contacts. 
 
 ```js
 const { status } = await Contacts.requestPermissionsAsync();
