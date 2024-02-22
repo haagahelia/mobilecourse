@@ -4,7 +4,7 @@ sidebar_position: 3
 ---
 - Layout can be defined by using **flexbox**
 - Flexbox works same way in React Native as it works with CSS in HTML
-- Parent container becomes Flex container and all its childs becomes Flex items.
+-  In flexbox layout, the parent container becomes the **Flex container**, and all its children become **Flex items**.
 
 ![](img/flexbox.PNG)
 
@@ -12,7 +12,7 @@ sidebar_position: 3
 
 #### **`flexDirection`**
 
-- Defines the direction how components are organized inside the container (horizontally or vertically). The default is vertically (Note, different than in web!).
+- Defines the direction how components are organized inside the container (horizontally or vertically). Unlike web flexbox, the default direction in React Native is vertical.
 - `flexDirection` also defines the **primary axis**
   ![](img/flexdirection.PNG)
 
@@ -30,7 +30,7 @@ sidebar_position: 3
 
 #### **`alignItems`**
 -Defines the alignment of childrens in the secondary axis. If `flexDirection` is `row` then the secondary axis is `column` and vice versa.
--Options: `center`, `flex-start`, `flex-end`, `stretch`
+-Options include: `center`, `flex-start`, `flex-end`, `stretch`
 
 ```jsx
 <View style={{flex: 1, flexDirection: 'row',
@@ -46,7 +46,7 @@ sidebar_position: 3
 
 #### **`justifyContent`**
 - Defines the distribution of childrens in the **primary** axis.
-  -Options: `center`, `flex-start`, `flex-end`, `space-around`,
+  -Options include: `center`, `flex-start`, `flex-end`, `space-around`,
   `space-between`
 
 ```jsx
@@ -58,4 +58,4 @@ sidebar_position: 3
 </View>
 ```
 
-![w:300 bg right](img/justifycontent.png)
+![](img/justifycontent.png)
