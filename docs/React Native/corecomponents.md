@@ -21,7 +21,7 @@ return (
   </View>
 );
 ```
-- Read more in https://reactnative.dev/docs/view
+- For more information and examples, refer to the official documentation https://reactnative.dev/docs/view
 - React Native provides also `<ScrollView>` component that is generic scrolling container (https://reactnative.dev/docs/scrollview).
 
 ### Text
@@ -41,7 +41,7 @@ return (
   </View>
 );
 ```
-- Read more in https://reactnative.dev/docs/text
+- For more information and examples, refer to the official documentation https://reactnative.dev/docs/text
 
 ### Button
 - `Button` component provides a basic button for user interaction
@@ -66,10 +66,9 @@ const buttonPressed = () => {
   Alert.alert("Button pressed");
 };
 ```
-
 ![](img/button.png)
 
-- Read more in https://reactnative.dev/docs/button
+- For more information and examples, refer to the official documentation https://reactnative.dev/docs/button
 
 ### Pressable
 - `Button` component support limited level of customization. You can use `Pressable` component to build yuor own button.
@@ -108,7 +107,7 @@ const styles = StyleSheet.create({
 export default RoundedRedButton;
 
 ```
-- Read more in https://reactnative.dev/docs/pressable
+- For more information and examples, refer to the official documentation https://reactnative.dev/docs/pressable
 
 ### TextInput
 - `TextInput` component allows users to enter and edit single or multiline text.
@@ -125,14 +124,11 @@ import { View, Button, Alert, TextInput } from "react-native";
 ```js
 const [text, setText] = useState("");
 ```
-
 - Render the `TextInput` component.
-
 ```jsx
 <TextInput style={{width: 200, borderColor: 'gray', borderWidth: 1}}
 onChangeText={text => setText(text)} value={text} />
 ```
-
 - Typed text is saved to the `text` state.
 - Then, we define `buttonPressed` function that shows `text` state value using the `Alert` component.
 
@@ -147,7 +143,7 @@ const buttonPressed = () => {
 ```
 ![](img/textinput.png)
 
-- Read more in https://reactnative.dev/docs/textinput
+- For more information and examples, refer to the official documentation https://reactnative.dev/docs/textinput
 
 ### Image
 - **`Image`** is component for displaying images

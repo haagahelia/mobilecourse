@@ -38,9 +38,8 @@ React Native provides possibility to write native code when high performance is 
 --  `<Image>` - component for displaying images
 --  `<TextInput>` - component for text input
 
-
 ### Layout
-- Layout can be defined by using **flexbox**
+- Layout can be defined by using **flexbox** in React Native apps.
 - Flexbox works same way in React Native as it works with CSS in HTML
 - Parent container becomes Flex container and all its childs becomes Flex items.
 
@@ -64,7 +63,7 @@ React Native provides possibility to write native code when high performance is 
   <View style="{{flex:" 2}}> Some components goes here - 2/3 space </View>
 </View>
 ```
-![w:300 bg right](img/flex.PNG)
+![](img/flex.PNG)
 
 #### **`alignItems`**
 -Defines the alignment of childrens in the secondary axis. If `flexDirection` is `row` then the secondary axis is `column` and vice versa.
@@ -79,8 +78,7 @@ React Native provides possibility to write native code when high performance is 
 </View>
 ```
 
-![w:300 bg right](img/alignitems.png)
-
+![](img/alignitems.png)
 
 #### **`justifyContent`**
 - Defines the distribution of childrens in the **primary** axis.
@@ -96,4 +94,4 @@ React Native provides possibility to write native code when high performance is 
 </View>
 ```
 
-![w:300 bg right](img/justifycontent.png)
+![](img/justifycontent.png)
