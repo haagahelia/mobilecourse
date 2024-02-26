@@ -62,8 +62,8 @@ const config = {
       navbar: {
         title: 'Mobile Programming',
         logo: {
-          alt: 'My Site Logo',
-          src: 'img/logo.svg',
+          alt: 'Haaga-Helia',
+          src: 'img/haagahelia.png',
         },
         items: [
           {
@@ -122,8 +122,7 @@ const config = {
             ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
-      },
+        copyright: `Mobile Programming © (${new Date().getFullYear()}) is licensed under CC BY-NC-SA 4.0`,      },
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
