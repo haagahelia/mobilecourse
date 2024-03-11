@@ -26,7 +26,7 @@ if (status === 'granted') {
   // Access contacts 
 }
 ```
-- The `getContactsAsync(query)` function is used to get contacts from your device and it is asynchronous.
+- The `getContactsAsync(query)` method is used to get contacts from your device and it is asynchronous.
 - The function returns an array of contact objects.
 
 ```js

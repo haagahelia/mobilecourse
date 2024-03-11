@@ -2,6 +2,12 @@
 title: "Core Components"
 sidebar_position: 4
 ---
+- React Native provides mobile components which can be used to create mobile apps
+Some of the most common core components are:
+- `<View>` - container that supports layout with flexbox
+- `<Button>` - basic button component
+- `<Image>` - component for displaying images
+- `<TextInput>` - component for text input
 
 ### View 
 - `View` is container component that supports flexbox layout.
