@@ -2,7 +2,7 @@
 title: "React Native API"
 sidebar_position: 6
 ---
-- React Native provides some useful APIs that you can use in your apps, for example:
+React Native provides some useful APIs that you can use in your apps, for example:
 
 ### Platform
 - `Platform` API can be used to get information about current platform
@@ -46,4 +46,4 @@ function App() {
 
 - You can for example dismiss the keyboard using the `Keyboard.dismiss()` method.
 
-You can more APIs from the React Native documentation https://reactnative.dev/docs/accessibilityinfo
+You can find more APIs from the React Native documentation https://reactnative.dev/docs/accessibilityinfo

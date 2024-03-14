@@ -2,7 +2,7 @@
 title: "Core Components"
 sidebar_position: 4
 ---
-- React Native provides mobile components which can be used to create mobile apps
+React Native provides mobile components which can be used to create mobile apps
 Some of the most common core components are:
 - `<View>` - container that supports layout with flexbox
 - `<Button>` - basic button component
@@ -10,7 +10,7 @@ Some of the most common core components are:
 - `<TextInput>` - component for text input
 
 ### View 
-- `View` is container component that supports flexbox layout.
+- `View` is a container component that supports flexbox layout.
 - It is used to group and structure other components within your application. 
 
 ```jsx
@@ -31,7 +31,7 @@ return (
 - React Native provides also `<ScrollView>` component that is generic scrolling container (https://reactnative.dev/docs/scrollview).
 
 ### Text
-- `Text` is component for displaying text.
+- `Text` is a component for displaying text.
 
 #### Using the `Text` component:
 - Import the `Text` component from React Native.
@@ -77,7 +77,7 @@ const buttonPressed = () => {
 - For more information and examples, refer to the official documentation https://reactnative.dev/docs/button
 
 ### Pressable
-- `Button` component support limited level of customization. You can use `Pressable` component to build yuor own button.
+- `Button` component support limited level of customization. You can use the `Pressable` component to build yuor own button.
 - For example, to get rounded red button:
 ```jsx
 import { Pressable, Text, StyleSheet } from 'react-native';
@@ -135,24 +135,24 @@ const [text, setText] = useState("");
 <TextInput style={{width: 200, borderColor: 'gray', borderWidth: 1}}
 onChangeText={text => setText(text)} value={text} />
 ```
-- Typed text is saved to the `text` state.
-- Then, we define `buttonPressed` function that shows `text` state value using the `Alert` component.
+- Text input is stored in the `text` state.
+- Then, we define `handlePress` function that shows `text` state value using the `Alert` component.
 
 ```js
-const buttonPressed = () => {
+const handlePress = () => {
   Alert.alert("You typed:" + text);
 };
 ```
 - Finally, import and render the `Button` component.
 ```jsx
-<button onPress="{buttonPressed}" title="Press me" />
+<button onPress="{handlePress}" title="Press me" />
 ```
 ![](img/textinput.png)
 
 - For more information and examples, refer to the official documentation https://reactnative.dev/docs/textinput
 
 ### Image
-- **`Image`** is component for displaying images
+- **`Image`** is a component for displaying images
 
 #### Using the `Image` component:
 - Import the `Image` component from React Native.
@@ -167,11 +167,11 @@ import { View, Image } from "react-native";
 <Image style={{width:250, height: 100}}
 source={require('./img/haaga-helia.jpg')} />
 ```
-- In the case of remote URI image, the source is defined in following way:
+- In the case of remote URI image, the source is defined in the following way:
 ```jsx
 source={{uri: 'IMAGE_URI'}}
 ```
 
 ![](img/image.png)
 
-- You can find more core components in https://reactnative.dev/docs/components-and-apis
+- For additional core components, refer to the following link https://reactnative.dev/docs/components-and-apis

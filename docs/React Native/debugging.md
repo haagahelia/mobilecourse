@@ -4,11 +4,11 @@ sidebar_position: 7
 ---
 ### Errors & Warnings
 
-- Fatal errors in the React Native are shown using the red box. Read the error message carefully. The reason for an error is shown there with the reference to your source code.
+- Fatal errors in the React Native are visually indicated through a red box. Read the error message carefully. The reason for an error is shown there with the reference to your source code. You can also see the error message in your terminal.
 
 ![w:220 bg right](img/error.png)
 
-- React Native warnings are shown using the yellow box.
+- Warnings in React Native are displayed using a yellow box.
 
 ![w:220 bg right](img/warning.png)
 - You can also generate your own errors and warnings by using `console.error` or `console.warn`.
