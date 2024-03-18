@@ -2,9 +2,9 @@
 title: "Layout"
 sidebar_position: 3
 ---
-- Layout can be defined by using **flexbox**
-- Flexbox works same way in React Native as it works with CSS in HTML
--  In flexbox layout, the parent container becomes the **Flex container**, and all its children become **Flex items**.
+React Native uses **Flexbox** as its primary layout system. Flexbox works same way in React Native as it works with CSS in HTML. 
+
+In the flexbox layout, the parent container becomes the **Flex container**, and all its children become **Flex items**.
 
 ![](img/flexbox.PNG)
 

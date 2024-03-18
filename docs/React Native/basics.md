@@ -2,9 +2,7 @@
 title: "General"
 sidebar_position: 1
 ---
-- **React Native** is framework for building mobile apps with Javascript (or TypeScript) and React
-- Developed by Meta https://reactnative.dev/
-- React Native enables developers to write code once and deploy it across multiple platforms, including iOS and Android, without the need to build separate codebases for each platform.
+**React Native** is framework for building mobile apps with Javascript (or TypeScript) and React. It is developed by Meta https://reactnative.dev/. React Native enables developers to write code once and deploy it across multiple platforms, including iOS and Android, without the need to build separate codebases for each platform.
 
 ### Comparison to other frameworks
 
