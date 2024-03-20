@@ -2,38 +2,27 @@
 title: "React Navigation"
 sidebar_position: 1
 ---
-- React Navigation provides navigation between different screens
-- The following navigators are available:
+React Navigation (https://reactnavigation.org/) is a popular routing and navigation library for React Native applications.
+
+The following navigation patterns are available:
   - Stack navigator
   - Tab navigator
-  - Drawer navigator
-- https://reactnavigation.org/ 
+  - Drawer navigator 
 
 ![](img/navigators.png)
 
 ### Installation
-- Installation of the core library and dependencies (React Navigation v6):
+Installation of the core library and dependencies (React Navigation v6):
 ```
 npm install @react-navigation/native
 npx expo install react-native-screens react-native-safe-area-context
 ```
 ### Tab Navigation
-- To implement tab navigation, you have to install also the @react-navigation/bottom-tabs
-```
-npm install @react-navigation/bottom-tabs
-```
-- Import the `NavigationContainer` and `createBottomTabNavigator` (in App.js)´
+In the next example, we implement a bottom tab navigator that provides  navigation between the home and settings screens within the application:
 
-```js
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-```
-- `createBottomNavigator` returns an object containing 2 properties: `Screen` and `Navigator`. Both are components
-- `Navigator` should contain `Screen` elements as its children to define the configuration for routes. 
-```js
-const Tab = createBottomTabNavigator();
-```
-- Next, we will create two simple components that we use in our navigation.
+![w:650](img/tab_navigator.png)
+
+- First, create a new React Nativa app and install React Navigator. Create two components that are used in the navigator:
 
 1.)  HomeScreen.js
 ```jsx
@@ -60,10 +49,43 @@ export default function SettingScreen() {
   );
 };
 ```
-- `NavigationContainer` is a component which manages the tree and contains the navigation state. It must wrap all navigators structure. 
-- Render this component at the root of your app
+- To implement tab navigation, you have to install the `@react-navigation/bottom-tabs` library:
+```bash
+npm install @react-navigation/bottom-tabs
+```
+- Import the `NavigationContainer` and `createBottomTabNavigator`. The `NavigatorContainer` serves as the root component for the navigation and it must be rendered at the top level of your React Native application.
 
-```jsx
+```jsx title="App.js"
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+export default function App() {
+  return (
+    <NavigationContainer>
+    </NavigationContainer>
+  );
+}
+```
+- Next, we call the `createBottomNavigator` function that allows you to create a tab-based navigation where tabs are displayed at the bottom of the screen. The function returns an object containing two components: `Screen` and `Navigator`.
+- The `Navigator` component manages the navigation state and renders the screens based on the current navigation state.
+- The `Screen` component represents an individual screen within the navigator.
+```jsx title="App.js"
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+// highlight-next-line
+const Tab = createBottomTabNavigator();
+  
+export default function App() {
+  return (
+    <NavigationContainer>
+    </NavigationContainer>
+  );
+}
+```
+- Finally, we can set-up the navigator. The `Screen` component's `name` prop defines the name that is used for screen. The name is also used to navigate to the screen. The `component` prop defines the React component to render for the screnn.
+
+```jsx title="App.js"
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './HomeScreen'
@@ -74,21 +96,22 @@ const Tab = createBottomTabNavigator();
 export default function App() {
   return (
     <NavigationContainer>
+      // highlight-start
       <Tab.Navigator>
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Settings" component={SettingScreen} />
       </Tab.Navigator>
+      // highlight-end
     </NavigationContainer>
   );
 }
 ```
+- Now, you should see the bottom tab naviagtor in your app and you are able to navigate between two components.
 
-![w:650](img/tab_navigator.png)
-
-- Expo provides icon library that can be used to show icons in your app.
-- See more info: https://docs.expo.dev/guides/icons/
+#### Tab icons
+- Expo provides icon library that can be used to show icons in your app (https://docs.expo.dev/guides/icons/).
 - To use icons, you have to import `Ionicons` component
-```
+```js
 import Ionicons from '@expo/vector-icons/Ionicons';
 ```
 - Then, you can render an icon. The `name` props defines what icon to show. You can explore different icons from: https://icons.expo.fyi/
