@@ -18,9 +18,9 @@ npm install @react-navigation/native
 npx expo install react-native-screens react-native-safe-area-context
 ```
 ### Tab Navigation
-In the next example, we implement a bottom tab navigator that provides  navigation between the home and settings screens within the application:
+In the next example, we implement a bottom tab navigator that provides navigation between the home and settings screens within the application:
 
-![w:650](img/tab_navigator.png)
+![](img/tabnaviicons.png)
 
 - First, create a new React Nativa app and install React Navigator. Create two components that are used in the navigator:
 
@@ -110,7 +110,7 @@ export default function App() {
 
 #### Tab icons
 - Expo provides icon library that can be used to show icons in your app (https://docs.expo.dev/guides/icons/).
-- To use icons, you have to import `Ionicons` component
+- To use icons, you have to import `Ionicons` component:
 ```js
 import Ionicons from '@expo/vector-icons/Ionicons';
 ```
@@ -144,8 +144,6 @@ import Ionicons from '@expo/vector-icons/Ionicons';
     </NavigationContainer>
 
 ```
-![w:650](img/tab_navigator2.png)
-
 ### Stack Navigation
 
 - Install @react-navigation/native-stack
@@ -231,4 +229,4 @@ function SettingsScreen({ route, navigation })
   );
 }
 ```
-![w:300 bg right](img/stack_navigator2.png)
+![](img/stack_navigator2.png)
