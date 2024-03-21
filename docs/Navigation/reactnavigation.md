@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
 });
 
 ```
-- To implement tab navigation, you have to install the `@react-navigation/bottom-tabs` library:
+- To implement tab navigation, we have to install the `@react-navigation/bottom-tabs` library:
 ```bash
 npm install @react-navigation/bottom-tabs
 ```
@@ -123,7 +123,7 @@ export default function App() {
   );
 }
 ```
-- Now, you should see the bottom tab naviagtor in your app and you are able to navigate between two components.
+- Now, we should see the bottom tab naviagtor in our app and we are able to navigate between two components.
 
 #### Tab icons
 - Expo provides icon library that can be used to show icons in your app (https://docs.expo.dev/guides/icons/).
@@ -170,16 +170,11 @@ In the following example, we'll demonstrate navigating between two screens using
 npm install @react-navigation/native-stack
 ```
 - Import `NavigationContainer` and `createStackNavigator` to the App.js file
-```js	
+```js	title="App.js"
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 ```
-- We call the `createNativeStackNavigator` function and render the navigator and screens.
-
-```js
-const Stack = createNativeStackNavigator();
-```
-- Now, the App.js source code looks like the following:
+- We call the `createNativeStackNavigator` function and render the navigator and screens. Now, the App.js source code looks like the following:
 ```jsx title="App.js"
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -199,7 +194,7 @@ export default function App() {
   );
 }
 ```
-- We add a button to our `HomeScreen` component. When the button is pressed, the user is navigated to the settings screen. 
+- We add a button to our `HomeScreen` component. When the button is pressed, the user is navigated to the setting screen. 
 - The component takes a single prop named `navigation`, which is provided by React Navigation and contains `navigate` function for navigating between screens.
 ```jsx
 // navigation prop is passed in to every screen component in stack navigator
@@ -229,7 +224,7 @@ return (
 );
 
 ```
-- Settings screen can now access the passed params
+- Setting screen can now access the passed params.
 
 ```js title="SettingScreen.js"
 function SettingsScreen({ route }) 
