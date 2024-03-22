@@ -2,12 +2,11 @@
 title: "Location"
 sidebar_position: 2
 ---
-- Location allows to read geolocation data from the device
+- Location allows to read geolocation data from the device (https://docs.expo.dev/versions/latest/sdk/location).
 - Install the `expo-location` library
 ```
 npx expo install expo-location
 ```
-- See the documentation: https://docs.expo.dev/versions/v43.0.0/sdk/location/
 - Import Location to your Component. When using Location we have to check permission  (access to geolocation, contacts etc.).
 
 ``` js
@@ -21,9 +20,9 @@ export default function App() {
   }, []);
 }
 ```
-- Check the permission first using the `useEffect()` hook.
-- The `requestForegroundPermissionsAsync()` method returns `granted` if the permission to use location is ok. 
-
+- Certain functionalities requires users permission. App permissions help support user privacy by protecting access to the restricted data (system state and users' contact informatio, etc.) and restricted actions, such as getting device location and recording audio.
+- We have to check the permission first using the `useEffect()` hook.
+- We use the `requestForegroundPermissionsAsync()` method to check if permission for location usage is granted.
 ```js
 useEffect(() => {
   (async () => {
@@ -36,7 +35,10 @@ useEffect(() => {
   })();
 }, []);
 ```
-- If permission is `granted`, get the current location.
+- Now, if you open the app in your device, you will see the permission dialog.
+
+![](img/permission.png)
+- Next, we use the `getCurrentPositionAsync(options)` method to get user's current location. The `options` parameter can be used to set desired accuracy, timeout duration, etc. If not provided, default settings will be used.
 ```js
 useEffect(() => {
   (async () => {

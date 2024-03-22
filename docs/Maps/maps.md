@@ -31,7 +31,9 @@ import MapView, { Marker } from 'react-native-maps';
 />
 ```
 :::info
-Use `region` prop instead of `initialRegion` when having region in state (dynamic map). For example,
+Use `region` prop instead of `initialRegion` when having region in state (dynamic map). Changing the `initialRegion` prop after the component has mounted will not result in a region change.
+
+For example,
 
 ```jsx
 // Create a state for region
@@ -49,8 +51,7 @@ const [region, setRegion] = useState({
 />
 ```
 :::
-- The `Marker` component is used to display a marker on a map.
-- To display marker, we add `Marker` inside the `MapView` component.
+- The `Marker` component is used to display a marker on a map. To display a marker, we add the `Marker` component inside the `MapView` component.
 - Marker's `coordinate` prop specifies the position of the marker on the map. It takes an object with latitude and longitude properties.
 - Marker's `title` prop allows you to specify a title for the marker. This title is displayed when the marker is tapped by the user on the map.
 ```jsx
@@ -70,3 +71,4 @@ const [region, setRegion] = useState({
     />
 </MapView>
 ```
+Next, we learn how to get current location of your device.

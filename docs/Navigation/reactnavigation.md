@@ -22,7 +22,7 @@ In the next example, we implement a bottom tab navigator that provides navigatio
 
 ![](img/tabnaviicons.png)
 
-- First, create a new React Native app and install React Navigator. Create two components that are used in the navigator:
+- First, create a new React Native app and install React Navigation. Create two components that are used in the navigator:
 
 ```jsx title="HomeScreen.js"
 import { StyleSheet, Text, View } from 'react-native';
