@@ -2,7 +2,9 @@
 title: "Firebase"
 sidebar_position: 3
 ---
-- To use the Firebase realtime database (NoSQL) with React Native, you can use **Firebase JavaScript SDK** or **React Native Firebase**. In this material, we are using the JavaScript SDK.
+**Firebase** (https://firebase.google.com/) is a platform developed by Google that provides a variety of tools and services for building and managing mobile and web applications. 
+
+To use the Firebase **Realtime Database** (NoSQL) with React Native, you can use **Firebase JavaScript SDK** or **React Native Firebase**. In this material, we are using the JavaScript SDK.
 ### Installation
 ```bash
 npx expo install firebase
