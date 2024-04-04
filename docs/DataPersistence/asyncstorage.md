@@ -2,12 +2,13 @@
 title: "Async Storage"
 sidebar_position: 1
 ---
-- **AsyncStorage** is asynchronous and persistent key-value pair storage system. AsyncStorage is suitable for storing small data sets like user profiles, settings, or app state.
+**AsyncStorage** is asynchronous and persistent key-value pair storage system. AsyncStorage is suitable for storing small data sets like user profiles, settings, or app state.
 ### Installation
+You can install Async Storage using the follwing npm command:
 ```bash
 npx expo install @react-native-async-storage/async-storage
 ```
-- Import the `AsyncStorage`:
+Import the `AsyncStorage`:
 ```js
 import { AsyncStorage } from '@react-native-async-storage/async-storage';
 ```
@@ -19,7 +20,7 @@ Value must be string or it should be 'stringified' before saving using `JSON.str
 :::
 
 ```js
-saveData = async () => {
+handleSave = async () => {
   try {
     await AsyncStorage.setItem('someKey', 'This is the value');
   } catch (error) {
@@ -32,7 +33,7 @@ saveData = async () => {
 The `getItem(key)` method can be used to read data. That retrieves data from AsyncStorage using the defined key.
 
 ```js
-readData = async () => {
+handleRead = async () => {
   try {
     let value = await AsyncStorage.getItem('someKey');
   } catch (error) {
@@ -40,4 +41,4 @@ readData = async () => {
   } 
 }
 ```
-- Expo provides also SecureStore that can be used to encrypt and securely store key–value pairs locally on the device (https://docs.expo.dev/versions/latest/sdk/securestore/).
+Expo provides also SecureStore that can be used to encrypt and securely store key–value pairs locally on the device (https://docs.expo.dev/versions/latest/sdk/securestore/).

@@ -4,24 +4,22 @@ sidebar_position: 3
 ---
 **Firebase** (https://firebase.google.com/) is a platform developed by Google that provides a variety of tools and services for building and managing mobile and web applications. 
 
-To use the Firebase **Realtime Database** (NoSQL) with React Native, you can use **Firebase JavaScript SDK** or **React Native Firebase**. In this material, we are using the JavaScript SDK.
+Firebase provides **Realtime Database** that is NoSQL cloud database. Data is stored as JSON and synchronized in realtime to every connected client. 
+
+To use the Firebase Realtime Database with React Native, you can use **Firebase JavaScript SDK** or **React Native Firebase**. In this material, we are using the JavaScript SDK.
 ### Installation
+You can install Firebase JavaScript SDK using the following command:
 ```bash
 npx expo install firebase
 ```
-- See also step 3: **Configure Metro** in https://docs.expo.dev/guides/using-firebase/
+See also step 3: **Configure Metro** in https://docs.expo.dev/guides/using-firebase/
 ### Shopping List
-- We will implement a simple Shopping list app where user can enter products (title and amount) and save them to the Firebase realtime database. Products are listed using the `FlatList` component. 
+Next, we will implement a simple Shopping list app where users can enter products (title and amount) and save them to the Firebase Realtime Database. Products will be listed using the `FlatList` component. 
 
-#### Imports
-- First, the following imports are needed
-
-```js
-import { initializeApp } from 'firebase/app';
-import { getDatabase, push, ref, onValue } from 'firebase/database';
-```
+Create a new Expo project and install Firebase JavaScript SDK.
 
 #### Create Firebase Project
+To use Firebase, we have to create a project in Firebase.
 - Sign up to Firebase (https://firebase.google.com/).
 - Create a new Firebase project and create new realtime database (Build menu).
 - Add new App to you Firebase project (Web app). 
@@ -35,8 +33,16 @@ import { getDatabase, push, ref, onValue } from 'firebase/database';
    ".write": true
  }
 ```
+#### Imports
+- First, the following imports are needed:
+
+```js
+import { initializeApp } from 'firebase/app';
+import { getDatabase, push, ref, onValue } from 'firebase/database';
+```
+### Initalize Firebase
 - Get your app intialization codes: Project Overview --> Project Settings
-- Initialize Firebase app and realtime database connection in your React Native app and create reference to the realtime database (see the code in the next slide)
+- Initialize Firebase app and realtime database connection in your React Native app and create reference to the realtime database:
 
 ```js
 // Initialize Firebase with your own config parameters
