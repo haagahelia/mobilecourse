@@ -1,13 +1,14 @@
 ---
-title: "React Native Elements"
+title: "React Native Paper"
 sidebar_position: 1
 ---
 
-### Installation
-- Install UI library to your project by typing the following command in your project folder.
+CHANGE THIS TO USE REACT NATIVE PAPER
 
+### Installation
+- Install React Native Paper UI library to your project by typing the following command in your project's folder.
 ```bash
-npm install @rneui/themed @rneui/base
+npm install react-native-paper
 ```
 - Next, we will learn some of the components that library provides.
 
