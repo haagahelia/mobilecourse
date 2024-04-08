@@ -18,11 +18,27 @@ In the following example project, we will learn some of the components that libr
 
 ### Example Project
 
-We create GitExplore app for searching GitHub repositories based on user-provided keywords. It is similar app that we already delveloped in the Networking section but now we build the user interface using React Native Paper components. SThe app also allows users to view repository details in a browser. The app looks the following:
+We create GitExplore app for searching GitHub repositories based on user-provided keywords. It is similar app that we already delveloped in the Networking section but now we build the user interface using React Native Paper components. The app also allows users to view repository details in a browser. The app looks the following:
 
 ![](img/repofinder.png)
 
 #### Create a project
+
+Create a new Expo project and install React Native Paper UI library:
+
+```bash
+npx create-expo-app gitexplorer
+cd gitexplorer
+npm install react-native-safe-area-context
+```
+
+### App header & GitExplorer component
+
+In the `App` component we provide theme.
+
+...
+
+We need two states to store keyword and repositories.
 
 #### Button & TextInput
 
