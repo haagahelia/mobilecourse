@@ -31,12 +31,45 @@ npx create-expo-app gitexplorer
 cd gitexplorer
 npm install react-native-safe-area-context
 ```
+Let's first create a new component `GitExplorer`:
+
+```jsx title="GitExplorer.js"
+import { StyleSheet, View } from 'react-native';
+
+export default function GitExplorer() {
+  return (
+    <View style={styles.container}>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginTop: 10,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+```
+In the `App` component we provide theme by using the `PaperProvider` component. The `PaperProvider` component ensures that all components have access to the necessary theme and configuration options. We also import `GitExplorer` component and render it in the `App` component.
+
+```jsx title="App.js"
+import { Provider as PaperProvider } from 'react-native-paper';
+import GitExplorer from './GitExplorer'
+
+export default function App() {
+  return (
+    <PaperProvider>
+      <GitExplorer />
+    </PaperProvider>
+  );
+}
+```
 
 ### App header & GitExplorer component
 
-In the `App` component we provide theme.
-
-...
 
 We need two states to store keyword and repositories.
 
