@@ -199,15 +199,17 @@ The `handleFetch` function is executed when the button is pressed.
 
 #### Flatlist & Card
 
-Then we display repositories using the React Native `FlatList` component. Now, each row displayed using React Native Paper `Card` component (https://callstack.github.io/react-native-paper/docs/components/Card/). To show text we use React Native Paper `Text` component that provides pre-defined text styles. You can see all styles in https://callstack.github.io/react-native-paper/docs/components/Text/.
+Then we display repositories using the React Native `FlatList` component. Now, each row is displayed using React Native Paper `Card` component (https://callstack.github.io/react-native-paper/docs/components/Card/). To show text we use React Native Paper `Text` component that provides pre-defined text styles. You can see all styles in https://callstack.github.io/react-native-paper/docs/components/Text/.
+
+First, Import required component:
 
 ```js title="GitExplore.js"
 import { useState } from 'react';
-import { Button, TextInput, Card, Text } from 'react-native-paper';
-import { StyleSheet, View, FlatList } from 'react-native';
+import { Button, TextInput, Card, Text } from 'react-native-paper'; // Import Card and Text
+import { StyleSheet, View, FlatList } from 'react-native'; // Import FlatList
 
 ```
-React Native `FlatList` is used to render a list of repositories. Each item in the list is represented by a `Card` component. This is a component from React Native Paper library representing a card UI element. It contains a title (repository full name) and a description (item.description). React Native Paper's `Text` component follows the typography guidelines specified in Material Design, which includes various styles like headline, title, subtitle, body, and caption. You can see all styles in https://callstack.github.io/react-native-paper/docs/components/Text/.
+Then render `FlatList` component:
 
 ```jsx title="GitExplorer.js"
   return (
@@ -238,7 +240,7 @@ React Native `FlatList` is used to render a list of repositories. Each item in t
     </View>
   );
 ```
-
+Now, You should see the repositories in the list when you type a keyword and press 'Search'-button.
 #### Web browser
 
 #### Activity indicator

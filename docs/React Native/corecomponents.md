@@ -10,7 +10,8 @@ Some of the most common core components are:
 - `<TextInput>` - component for text input
 
 ### View 
-- `View` is a container component that supports flexbox layout.
+`View` is a container component that supports flexbox layout.
+
 - It is used to group and structure other components within your application. 
 
 ```jsx
@@ -31,7 +32,7 @@ return (
 - React Native provides also `<ScrollView>` component that is generic scrolling container (https://reactnative.dev/docs/scrollview).
 
 ### Text
-- `Text` is a component for displaying text.
+`Text` is a component for displaying text.
 
 #### Using the `Text` component:
 - Import the `Text` component from React Native.
@@ -50,7 +51,7 @@ return (
 - For more information and examples, refer to the official documentation https://reactnative.dev/docs/text
 
 ### Button
-- `Button` component provides a basic button for user interaction
+`Button` component provides a basic button for user interaction
 
 #### Using the `Button` component:
 - Import the `Button` component from React Native.
@@ -77,7 +78,8 @@ const buttonPressed = () => {
 - For more information and examples, refer to the official documentation https://reactnative.dev/docs/button
 
 ### Pressable
-- `Button` component support limited level of customization. You can use the `Pressable` component to build yuor own button.
+Button` component support limited level of customization. You can use the `Pressable` component to build yuor own button.
+
 - For example, to get rounded red button:
 ```jsx
 import { Pressable, Text, StyleSheet } from 'react-native';
@@ -116,7 +118,7 @@ export default RoundedRedButton;
 - For more information and examples, refer to the official documentation https://reactnative.dev/docs/pressable
 
 ### TextInput
-- `TextInput` component allows users to enter and edit single or multiline text.
+`TextInput` component allows users to enter and edit single or multiline text.
 
 #### Using the `TextInput` component:
 - Import the `TextInput` component from React Native.
@@ -145,14 +147,14 @@ const handlePress = () => {
 ```
 - Finally, import and render the `Button` component.
 ```jsx
-<button onPress="{handlePress}" title="Press me" />
+<button onPress={handlePress} title="Press me" />
 ```
 ![](img/textinput.png)
 
 - For more information and examples, refer to the official documentation https://reactnative.dev/docs/textinput
 
 ### Image
-- **`Image`** is a component for displaying images
+`Image` is a component for displaying images
 
 #### Using the `Image` component:
 - Import the `Image` component from React Native.
@@ -160,12 +162,13 @@ const handlePress = () => {
 ```js
 import { View, Image } from "react-native";
 ```
-
-- Render the `Image` component (**local image**)
+- Render the `Image` component (**local image**). You have to manually define width and height for the image.
 
 ```jsx
-<Image style={{width:250, height: 100}}
-source={require('./img/haaga-helia.jpg')} />
+<Image
+  style={{ width:250, height: 100 }}
+  source={require('./img/haaga-helia.jpg')} 
+/>
 ```
 - In the case of remote URI image, the source is defined in the following way:
 ```jsx

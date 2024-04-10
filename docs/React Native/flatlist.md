@@ -2,8 +2,14 @@
 title: "Flatlist"
 sidebar_position: 5
 ---
-- **`FlatList`** is a versatile list component with several useful features, including headers, footers, and scrolling capabilities.
-- Import the `FlatList` component from React Native
+**`FlatList`** is a versatile list component with several useful features, including headers, footers, and scrolling capabilities.
+
+In the next example, we create a simple todo app that looks the following:
+
+![](img/flatlist.png)
+
+#### Using the `FlatList` component:
+- Import the `FlatList` component from React Native:
 ```js
 import {
   StyleSheet,
@@ -14,25 +20,38 @@ import {
   FlatList,
 } from "react-native";
 ```
-- Declare new states to manage text input and FlatList items.
+- Declare new states to manage text input and FlatList items:
 ```js
-const [text, setText] = useState("");
-const [data, setData] = useState([]);
+const [todo, setTodo] = useState("");
+const [todos, setTodos] = useState([]);
 ```
-- Render the `FlatList` component to display your list.
+- Next, we render the `TextInput` and `Button` components:
 ```jsx
-<FlatList data={data} renderItem={({item}) => <Text>{item.key}</Text>} />
+return (  
+  <View style={styles.container}>
+    <TextInput 
+      value={todo}
+      onChangeText={text => setTodo(text)}
+      placeholder='Enter a new task...'
+    />
+    <Button title='Add' onPress={handlePress}  />
+  </View>
+);
 ```
-- The `renderItem` prop defines how data items are rendered within the list.
-- The `data` prop indicates the source of the data, which must be an array
-- The `keyExtractor` prop extracts a unique key for each item in the list. It that is not defined, index will be used.
-
-- Insert typed text from the `TextItem` component to the `data` state when button is pressed utilizing spread syntax..
+- The `handlePress` function is called when the "Add" button is pressed. This function adds the current value of the `todo` state (representing the new task) to the `todos` state array. After adding the task to the array, the `todo` state is reset to an empty string, clearing the `TextInput` for the next task input.
 ```js
-const buttonPressed = () => {
-  setData([...data, { key: text }]);
-  setText("");
+const handlePress = () => {
+  setTodos([...todos, { key: todo }]);
+  setTodo("");
 };
 ```
+- Finally, we render the `FlatList` component to display all todos.
+```jsx
+<FlatList 
+  data={todos} 
+  renderItem={({item}) => <Text>{item.key}</Text>} 
+/>
+```
+- The `renderItem` prop defines how data items are rendered within the list. The `data` prop indicates the source of the data, which must be an array. The `keyExtractor` prop extracts a unique key for each item in the list. It that is not defined, index will be used.
 
-![](img/flatlist.png)
+
