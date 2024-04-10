@@ -207,8 +207,7 @@ import { Button, TextInput, Card, Text } from 'react-native-paper';
 import { StyleSheet, View, FlatList } from 'react-native';
 
 ```
-
-Then render `FlatList`
+React Native `FlatList` is used to render a list of repositories. Each item in the list is represented by a `Card` component. This is a component from React Native Paper library representing a card UI element. It contains a title (repository full name) and a description (item.description). React Native Paper's `Text` component follows the typography guidelines specified in Material Design, which includes various styles like headline, title, subtitle, body, and caption. You can see all styles in https://callstack.github.io/react-native-paper/docs/components/Text/.
 
 ```jsx title="GitExplorer.js"
   return (
@@ -241,3 +240,5 @@ Then render `FlatList`
 ```
 
 #### Web browser
+
+#### Activity indicator
