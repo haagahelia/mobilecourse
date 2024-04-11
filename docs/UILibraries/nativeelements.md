@@ -101,7 +101,6 @@ export default function App() {
 Now, you should see the app bar at the top of you app.
 
 #### Button & TextInput
-
 In the `GitExplorer` component, we need two states to store keyword and repositories.
 
 ```jsx title="GitExplorer.js"
@@ -160,7 +159,6 @@ In this phase, your app should look like the image below:
 ![](img/GitExplorer1.png)
 
 #### Fetch
-
 Next, we implement the network request to fetch repositories. Add the following function in your `GitExplorer` component.
 
 ```js
@@ -198,7 +196,6 @@ The `handleFetch` function is executed when the button is pressed.
 ```
 
 #### Flatlist & Card
-
 Then we display repositories using the React Native `FlatList` component. Now, each row is displayed using React Native Paper `Card` component (https://callstack.github.io/react-native-paper/docs/components/Card/). To show text we use React Native Paper `Text` component that provides pre-defined text styles. You can see all styles in https://callstack.github.io/react-native-paper/docs/components/Text/.
 
 First, Import required component:
@@ -241,6 +238,84 @@ Then render `FlatList` component:
   );
 ```
 Now, You should see the repositories in the list when you type a keyword and press 'Search'-button.
-#### Web browser
 
-#### Activity indicator
+#### Web Browser
+Next, we implement the feature that user can browse the github site from the list. We use `Card.Action` component to show a button inside the `Card` component. We use `IconButton` component which displays only an icon without a label. When the button is pressed, we call `handleBrowse` function and pass repository url as an argument.
+
+```jsx title="GitExplore.js"
+// Import IconButton from react-native-paper
+
+renderItem={({item}) => 
+  <Card style={{ marginBottom: 10 }}>
+    <Card.Title title={item.full_name} />
+    <Card.Content>
+      <Text variant="bodyMedium">{item.description}</Text>
+    </Card.Content>  
+    <Card.Actions>
+      <IconButton icon="web" onPress={() => handleBrowse(item.html_url)} />
+    </Card.Actions>       
+  </Card>
+  }
+/>
+```
+Then, we implement the `handleBrowse` function that opens device browser and navigates to Github repository. We use Expo SDK's **WebBrowser** library that provides access to device's web browser. Install the WebBrowser library using the following command:
+```bash
+npx expo install expo-web-browser
+```
+
+Import `WebBrowser`:
+```js title="GitExplorer.js"
+import * as WebBrowser from 'expo-web-browser';
+```
+The `handleBrowse` is an asynchronous function declared using the `async` keyword. It takes a parameter url, which represents the URL of the repository to browse. The `openBrowserAsync` function opens the default web browser on the device and opens the provided URL:
+```js title="GitExplorer.js"
+const handleBrowse = async (url) => {
+  try {
+    let result = await WebBrowser.openBrowserAsync(url);
+  } catch (error) {
+    console.error('Error occurred while opening the browser:', error);
+  }
+}
+```
+When you press the icon button, device's default web browser is opened and it displays the GitHub repository page.
+
+#### Loading indicator
+In the final step, we implement loading indicator. The React Native `Button` component has `laoding` boolean props that determines whether the button should display a loading indicator.
+
+First, we create a new state `loading` that is used to control whether a loading indicator should be displayed on the search button. When the component first renders, there are no ongoing loading operations; therefore, the `loading` state intial value is `false`. 
+
+```js title="GitExplore.js"
+const [loading, setLoading] = useState(false);
+```
+
+When `handleFetch` function is called, we set `loading` state to `true`. This indicates that a loading operation is in progress and loading indicator should be visible. When the response from the API is received or an error occurs, the `loading` state is set back to `false`. This indicates that the fetch operation has completed, and the loading indicator should dissapear.
+
+```js title="GitExplore.js"
+const handleFetch = () => {
+  // highlight-next-line
+  setLoading(true);
+  fetch(`https://api.github.com/search/repositories?q=${keyword}`)
+  .then(response => {
+    if (!response)
+      throw new Error("Error in fetch: " + response.statusText);
+    // highlight-next-line
+    setLoading(false);
+    return response.json();
+  })
+  .then(data => setRepositories(data.items))
+  .catch(err =>  { 
+    // highlight-next-line
+    setLoading(false);
+    console.error(err);
+  })
+}
+```
+In the Search button the loading prop is passed as `loading={loading}`, meaning it takes the value of the `loading` state defined in the component's state.
+
+```jsx title="GitExplore.js"
+<Button loading={loading} mode="contained" icon="search-web" onPress={handleFetch}>
+  Search
+</Button>  
+```
+
+Now when type a keyword and press Search button, you should see the loading indicator inside the button.
