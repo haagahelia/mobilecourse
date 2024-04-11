@@ -18,7 +18,7 @@ In the following example project, we will learn some of the components that libr
 
 ### Example Project
 
-We create GitExplore app for searching GitHub repositories based on user-provided keywords. It is similar app that we already delveloped in the Networking section but now we build the user interface using React Native Paper components. The app also allows users to view repository details in a browser. 
+We create GitExplore app for searching GitHub repositories based on user-provided keywords. It is similar app that we already delveloped in the Networking section, but now we build the user interface using React Native Paper components. The app also allows users to view repository details in a browser. 
 
 Github REST API url to fetch repositories by keyword is https://api.github.com/search/repositories?q={keyword}.
 
