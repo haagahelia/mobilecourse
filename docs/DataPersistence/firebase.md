@@ -16,77 +16,149 @@ See also step 3: **Configure Metro** in https://docs.expo.dev/guides/using-fireb
 ### Shopping List
 Next, we will implement a simple Shopping list app where users can enter products (title and amount) and save them to the Firebase Realtime Database. Products will be listed using the `FlatList` component. 
 
+#### Create Expo project
 Create a new Expo project and install Firebase JavaScript SDK.
+
+```bash
+npx create-expo-app shoppinglist
+cd shoppinglist
+npx expo install firebase
+```
 
 #### Create Firebase Project
 To use Firebase, we have to create a project in Firebase.
-- Sign up to Firebase (https://firebase.google.com/).
-- Create a new Firebase project and create new realtime database (Build menu).
-- Add new App to you Firebase project (Web app). 
 
-![w:550](img/firebase_app.PNG) 
+1. Sign up to Firebase (https://firebase.google.com/).
 
-- In the Realtime database, define your database rules for demo purposes: Database --> Rules tab
-```json
- "rules": {
-   ".read": true,
-   ".write": true
- }
-```
-#### Imports
-- First, the following imports are needed:
+2. Create a new Firebase project and create new realtime database (Build menu).
+
+![](img/firebase_app.PNG) 
+
+In the Security Rules, you can select **Start in test mode**. You can change security rules later in Realtime Database -> **Rules** tab.
+
+3. Add new App to you Firebase project (**Web app**) 
+
+![](img/firebase_app2.PNG) 
+
+Now, you can get the initialization code in the App registration phase. Copy the initialization, we will need that later:
 
 ```js
+// Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
-import { getDatabase, push, ref, onValue } from 'firebase/database';
-```
-### Initalize Firebase
-- Get your app intialization codes: Project Overview --> Project Settings
-- Initialize Firebase app and realtime database connection in your React Native app and create reference to the realtime database:
 
-```js
-// Initialize Firebase with your own config parameters
+// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDj8VKxFj9kYKng0Gfy12345",
-  authDomain: "shoppinglist.firebaseapp.com",
-  databaseURL: "https://shoppinglist.firebaseio.com",
-  projectId: "shoppinglist",
-  storageBucket: "shoppinglist.appspot.com",
-  messagingSenderId: "54449XX3822XX"
+  apiKey: "AIzjSyA8Bh7rwerN4OGbVLedJ54hjWj6FHP3fqpegwQ",
+  authDomain: "shoppingapp-91ahe.firebaseapp.com",
+  databaseURL: "https://shoppingapp-91-rtdb.us-west1.firebasedatabase.app",
+  projectId: "shoppingapp-91ede",
+  storageBucket: "shoppingapp-91ede.appspot.com",
+  messagingSenderId: "1056464134052",
+  appId: "1:10864638354052:web:e959565f804cacd0ed691"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
 ```
-- Database reference is needed to perform database operations.
-- The `ref` function creates a reference to a location in the Firebase realtime database. In the following code, it's referencing the ***items/*** location. This means you want to interact with the ***items*** node in your database.
-```js
-ref(database,'items/')
+Now, we are ready to start app development.
+
+#### Initialize Firebase
+
+Let's create a new file named **firebaseConfig.js** in our Expo project. Copy the initialization code from the previous step. If you haven't copied the code, you can get the initialization code from the Firebase: Project Overview -> Project Settings
+
+Copy the code to the `firebaseConfig.js` file and export the `app`:
+
+```js title="firebaseConfig.js
+import { initializeApp } from "firebase/app";
+
+const firebaseConfig = {
+  apiKey: "AIzjSyA8Bh7rwerN4OGbVLedJ54hjWj6FHP3fqpegwQ",
+  authDomain: "shoppingapp-91ahe.firebaseapp.com",
+  databaseURL: "https://shoppingapp-91-rtdb.us-west1.firebasedatabase.app",
+  projectId: "shoppingapp-91ede",
+  storageBucket: "shoppingapp-91ede.appspot.com",
+  messagingSenderId: "1056464134052",
+  appId: "1:10864638354052:web:e959565f804cacd0ed691"
+};
+
+export const app = initializeApp(firebaseConfig);
 ```
-- Declare states for product and list items that you can show all shopping items in the `FlatList` component.
-```js
+
+The `firebaseConfig` object contains the configuration settings required to initialize Firebase within the app. The `initializeApp` function is called with the `firebaseConfig` object as its parameter. This initializes Firebase within the application using the provided configuration. Finally, the initialized Firebase `app` instance is exported using `export const app`. This allows other parts of the application to import and use the initialized Firebase app for accessing Firebase services
+
+#### Shopping App
+Now, we are ready to start develop the shopping list app. We create two states for product and list items that you can show all shopping items in the `FlatList` component. Open the `App.js` file and create the following states:
+```js title="App.js"
 const [product, setProduct] = useState({
   title: '',
   amount: ''
 });
 const [items, setItems] = useState([]);
 ```
-- Add two `TextInput` components that are used to store entered values in the `product` state's `title` and `amount` properties.
-- Add `Button` component that executes `saveItem` function when the button is pressed.
-- Data can be saved using the `push` method. The first argument is a reference to location where data is saved. The second argument is data that is saved (`product` object).
-- The `push` method automatically generates unique id for items in the Firebase realtime database.
+Next, we add two `TextInput` components that are used to store entered values in the `product` state's `title` and `amount` properties. We also add the `Button` component that execute `handleSave` function when the button is pressed.
+
+```jsx title="App.js"
+const handleSave = () => {
+}
+
+return (  
+  <View style={styles.container}>
+    <TextInput 
+      placeholder='Product name' 
+      onChangeText={(name) => setProduct({...product, name: name})}
+      value={product.name}/>  
+    <TextInput 
+      placeholder='Amount' 
+      onChangeText={(amount) => setProduct({...product, amount: amount})}
+      value={product.amount}/>   
+    <Button onPress={handleSave} title="Save" /> 
+  </View>
+);
+```
+Next, we implement the save functionality. Import the `app` instance from the `firebaseConfig`.
+```js title="App.js"
+import { app } from './firebaseConfig';
+```
+To use realtime database we have to intialize realtime database and get a reference to service using the `getDatabase` method. Add the following import and call the `getDatabase` method:
+```js title ="App.js"
+import { getDatabase } from "firebase/database";
+
+const database = getDatabase(app);
+```
+No, we are ready to use realtime database. The Database reference is needed to perform database operations. The `ref` function creates a reference to a location in the Firebase realtime database. Data can be saved using the `push` method. We have to add the following imports in our `Àpp` component. 
+```js title ="App.js"
+import { getDatabase, ref, push } from "firebase/database";
+```
+ Then we call the `push` method in our `handleSave` function. The first argument is a reference to location where data is saved. The second argument is data that is saved (`product` object). The `push` method automatically generates unique id for items in the Firebase realtime database.
 
 ```js
-const saveItem = () => {
+const handleSave = () => {
   push(ref(database, 'items/'), product); 
 }
 ```
+Let's also add check that empty products are not saved:
+```js
+const handleSave = () => {
+  if (product.amount && product.name) {
+    push(ref(database, 'items/'), product);
+  }
+  else {
+    Alert.alert('Error', 'Type product and amount first');
+  }
+}
+```
+Now, if you save products, you should see these in your Firebase Realtime Database:
 
 ![](img/items_collection.png)
 
-- Data can be read by using `onValue` that listens for data changes in the Firebase realtime database.That triggers a callback each time the data changes and we get a current snapshot of our collection (in this case `items`)
+- Data can be read by using `onValue` that listens for data changes in the Firebase realtime database. That triggers a callback each time the data changes and we get a current snapshot of our collection (in this case `items`)
 
-```js
+```js title="App.js"
+// Import onValue & useEffect
+import { useState, useEffect } from 'react';
+import { getDatabase, push, ref, onValue } from 'firebase/database';
+
+// Execute onValue inside the useEffect hook
 useEffect(() => {
   const itemsRef = ref(database, 'items/');
   onValue(itemsRef, (snapshot) => {
@@ -96,7 +168,15 @@ useEffect(() => {
 }, []);
 
 ```
-- Finally, you can add `FlatList` component and render `items` state data.
+- Finally, you can add `FlatList` component and display products that are saved to the `items` state.
+```jsx title="App.js"
+<FlatList 
+  renderItem={({item}) => 
+    <View style={styles.listcontainer}>
+      <Text style={{fontSize: 18}}>{item.name}, {item.amount}</Text>
+    </View>} 
+  data={items} />      
+```
 
 ### Read More
 - Firebase Realtime Database documentation: https://firebase.google.com/docs/database
