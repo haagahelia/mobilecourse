@@ -2,21 +2,21 @@
 title: "SQLite"
 sidebar_position: 2
 ---
-- **SQLite**  (https://www.sqlite.org/) is light-weight SQL database and it is built into both Android and iOS devices.
-- `expo-sqlite` is the library that gives an access to SQLite database.
-- Installation:
+**SQLite**  (https://www.sqlite.org/) is light-weight SQL database and it is built into both Android and iOS devices.`expo-sqlite` is the library that gives an access to SQLite database.
+
+Installation:
 ```bash
 npx expo install expo-sqlite 
-````
-- Example: Courselist app where user types course title and credits. The course is saved to a database when save button is pressed. All courses are shown in the flatlist component.
+```
+Example: Courselist app where user types course title and credits. The course is saved to a database when save button is pressed. All courses are shown in the flatlist component.
 
 ![](img/courselist.png)
 
-- First, import the SQLite from `expo-sqlite` to your Component
+First, import the SQLite from `expo-sqlite` to your Component
 ```js
 import * as SQLite from 'expo-sqlite';
 ```
-- States are needed for title and credit input fields and all courses that are shown in the `FlatList`.
+States are needed for title and credit input fields and all courses that are shown in the `FlatList`.
 
 ```js
  const [credit, setCredit] = useState('');
@@ -29,12 +29,12 @@ import * as SQLite from 'expo-sqlite';
 const db = SQLite.openDatabase('coursedb.db');
 ```
 
-- Opening a database returns database object.  The object has method `transaction` which can be used for database operations. Method has three parameters: The first is one is used to execute sql statement. The second one is executed if errors happen. The third one is executed when transaction is completed successfully.
+Opening a database returns database object.  The object has method `transaction` which can be used for database operations. Method has three parameters: The first is one is used to execute sql statement. The second one is executed if errors happen. The third one is executed when transaction is completed successfully.
 
 ```js
 db.transaction(callback, error, success)
 ```
-- Database is created in the `useEffect` hook by using transaction's `executeSql` method.
+Database is created in the `useEffect` hook by using transaction's `executeSql` method.
 
 ```js
   useEffect(() => {
@@ -43,9 +43,9 @@ db.transaction(callback, error, success)
     }, () => console.error("Error when creating DB"), updateList);  
   }, []);
 ```
-- The `updateList` function fetch all courses from the database and updates the `FlatList` (code is shown later).
+The `updateList` function fetch all courses from the database and updates the `FlatList` (code is shown later).
 
-- In the `return` statement we rended two input fields (title and credits) and button which saves item to database when it is pressed. The button will execute `saveItem` function which handles `insert` operation to database.
+In the `return` statement we rended two input fields (title and credits) and button which saves item to database when it is pressed. The button will execute `saveItem` function which handles `insert` operation to database.
 
 ```jsx
 <TextInput 
@@ -59,7 +59,7 @@ db.transaction(callback, error, success)
   value={credit}/> 
 <Button onPress={saveItem} title="Save" />
 ```
-- The `saveItem` function uses `executeSql` method to insert new item in the course table. The `updateList` function is executed after successful insert. Query argument array is the second parameter in executeSql method (substitutes ?-marks in the SQL statement)
+The `saveItem` function uses `executeSql` method to insert new item in the course table. The `updateList` function is executed after successful insert. Query argument array is the second parameter in executeSql method (substitutes ?-marks in the SQL statement)
 
 ```js
 const saveItem = () => {
@@ -69,7 +69,7 @@ const saveItem = () => {
     }, null, updateList)
 }
 ```
-- The `updateList` function fetch all items from the course table and save data to `courses` state (-> re-render).  The third parameter of the `executeSql` function is success function which takes resultset object as a second argument. The Resultset object contains `rows._array` which is the array of rows returned by query.
+The `updateList` function fetch all items from the course table and save data to `courses` state (-> re-render).  The third parameter of the `executeSql` function is success function which takes resultset object as a second argument. The Resultset object contains `rows._array` which is the array of rows returned by query.
 
 ```js
 const updateList = () => {
@@ -80,7 +80,7 @@ const updateList = () => {
   }, null, null);
 }
 ```
-- In the `FlatList` component, we show title and credits of the courses. Each rows contains also `Text` component that executes `deleteItem` function when it is pressed. The unique id of the item is passed to the delete function.
+In the `FlatList` component, we show title and credits of the courses. Each rows contains also `Text` component that executes `deleteItem` function when it is pressed. The unique id of the item is passed to the delete function.
 
 ```jsx
 <FlatList 
@@ -94,7 +94,7 @@ const updateList = () => {
   data={courses} 
 /> 
 ```
-- The `deleteItem` function deletes item from the course table and updates flatlist after the deletion.
+The `deleteItem` function deletes item from the course table and updates flatlist after the deletion.
 
 ```js
 const deleteItem = (id) => {
@@ -102,6 +102,4 @@ const deleteItem = (id) => {
   tx => tx.executeSql('delete from course where id = ?;', [id]);}, null, updateList) 
 }
 ```
-
-- See the whole source code from http://bit.ly/2AGCToQ
 
