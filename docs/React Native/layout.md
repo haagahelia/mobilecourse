@@ -29,8 +29,7 @@ In the flexbox layout, the parent container becomes the **Flex container**, and 
 ![w:300 bg right](img/flex.PNG)
 
 #### **`alignItems`**
--Defines the alignment of childrens in the secondary axis. If `flexDirection` is `row` then the secondary axis is `column` and vice versa.
--Options include: `center`, `flex-start`, `flex-end`, `stretch`
+- Defines the alignment of childrens in the secondary axis. If `flexDirection` is `row` then the secondary axis is `column` and vice versa. Options include: `center`, `flex-start`, `flex-end`, `stretch`
 
 ```jsx
 <View style={{flex: 1, flexDirection: 'row',
