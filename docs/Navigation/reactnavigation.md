@@ -22,7 +22,7 @@ In the next example, we implement a bottom tab navigator that provides navigatio
 
 ![](img/tabnaviicons.png)
 
-- First, create a new React Native app and install React Navigation. Create two components that are used in the navigator:
+First, create a new React Native app and install React Navigation. Create two components that are used in the navigator:
 
 ```jsx title="HomeScreen.js"
 import { StyleSheet, Text, View } from 'react-native';
@@ -66,11 +66,11 @@ const styles = StyleSheet.create({
 });
 
 ```
-- To implement tab navigation, we have to install the `@react-navigation/bottom-tabs` library:
+To implement tab navigation, we have to install the `@react-navigation/bottom-tabs` library:
 ```bash
 npm install @react-navigation/bottom-tabs
 ```
-- Import the `NavigationContainer` and `createBottomTabNavigator`. The `NavigatorContainer` serves as the root component for the navigation and it must be rendered at the top level of your React Native application.
+Import the `NavigationContainer` and `createBottomTabNavigator`. The `NavigatorContainer` serves as the root component for the navigation and it must be rendered at the top level of your React Native application.
 
 ```jsx title="App.js"
 import { NavigationContainer } from '@react-navigation/native';
@@ -83,9 +83,9 @@ export default function App() {
   );
 }
 ```
-- Next, we call the `createBottomNavigator` function that allows you to create a tab-based navigation where tabs are displayed at the bottom of the screen. The function returns an object containing two components: `Screen` and `Navigator`.
-- The `Navigator` component manages the navigation state and renders the screens based on the current navigation state.
-- The `Screen` component represents an individual screen within the navigator.
+Next, we call the `createBottomNavigator` function that allows you to create a tab-based navigation where tabs are displayed at the bottom of the screen. The function returns an object containing two components: `Screen` and `Navigator`. 
+
+The `Navigator` component manages the navigation state and renders the screens based on the current navigation state. The `Screen` component represents an individual screen within the navigator.
 ```jsx title="App.js"
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
@@ -100,7 +100,7 @@ export default function App() {
   );
 }
 ```
-- Finally, we can set-up the navigator. The `Screen` component's `name` prop defines the name that is used for screen. The name is also used to navigate to the screen. The `component` prop defines the React component to render for the screnn.
+Finally, we can set-up the navigator. The `Screen` component's `name` prop defines the name that is used for screen. The name is also used to navigate to the screen. The `component` prop defines the React component to render for the screnn.
 
 ```jsx title="App.js"
 import { NavigationContainer } from '@react-navigation/native';
@@ -123,19 +123,20 @@ export default function App() {
   );
 }
 ```
-- Now, we should see the bottom tab naviagtor in our app and we are able to navigate between two components.
+Now, we should see the bottom tab naviagtor in our app and we are able to navigate between two components.
 
 #### Tab icons
-- Expo provides icon library that can be used to show icons in your app (https://docs.expo.dev/guides/icons/).
-- To use icons, you have to import `Ionicons` component:
+Expo provides icon library that can be used to show icons in your app (https://docs.expo.dev/guides/icons/).
+
+To use icons, you have to import `Ionicons` component:
 ```js
 import Ionicons from '@expo/vector-icons/Ionicons';
 ```
-- Then, you can render an icon. The `name` props defines what icon to display. You can explore different icons in: https://icons.expo.fyi/
-```
+Then, you can render an icon. The `name` props defines what icon to display. You can explore different icons in: https://icons.expo.fyi/
+```jsx
   <Ionicons name="home" size={32} color="red" />
 ```
-- Next, we'll add icons to our tab navigation bar by utilizing the `screenOptions` property of the `Navigator` component.
+Next, we'll add icons to our tab navigation bar by utilizing the `screenOptions` property of the `Navigator` component.
 ```jsx
 <NavigationContainer>
   <Tab.Navigator
@@ -165,16 +166,16 @@ In the following example, we'll demonstrate navigating between two screens using
 
 ![](img/stack_navigator.png)
 
-- To use stack navigation, we have to Install `@react-navigation/native-stack` library:
+To use stack navigation, we have to Install `@react-navigation/native-stack` library:
 ```
 npm install @react-navigation/native-stack
 ```
-- Import `NavigationContainer` and `createStackNavigator` to the App.js file
+Import `NavigationContainer` and `createStackNavigator` to the App.js file
 ```js	title="App.js"
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 ```
-- We call the `createNativeStackNavigator` function and render the navigator and screens. Now, the App.js source code looks like the following:
+We call the `createNativeStackNavigator` function and render the navigator and screens. Now, the App.js source code looks like the following:
 ```jsx title="App.js"
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -194,8 +195,7 @@ export default function App() {
   );
 }
 ```
-- We add a button to our `HomeScreen` component. When the button is pressed, the user is navigated to the setting screen. 
-- The component takes a single prop named `navigation`, which is provided by React Navigation and contains `navigate` function for navigating between screens.
+We add a button to our `HomeScreen` component. When the button is pressed, the user is navigated to the setting screen. The component takes a single prop named `navigation`, which is provided by React Navigation and contains `navigate` function for navigating between screens.
 ```jsx
 // navigation prop is passed in to every screen component in stack navigator
 export default function HomeScreen({ navigation }) {
@@ -211,7 +211,7 @@ export default function HomeScreen({ navigation }) {
 }
 ```
 #### Passing parameters between pages
-- Parameters can be passed by using the navigator's `route` propss.
+Parameters can be passed by using the navigator's `route` propss.
 
 ```jsx title="HomeScreen.js"
 return (
@@ -224,7 +224,7 @@ return (
 );
 
 ```
-- Setting screen can now access the passed params.
+Setting screen can now access the passed params.
 
 ```js title="SettingScreen.js"
 function SettingsScreen({ route }) 
