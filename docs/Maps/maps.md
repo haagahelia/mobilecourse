@@ -5,6 +5,7 @@ sidebar_position: 1
 `MapView` is the component that shows Google Map on Android or Apple Map on iOS (https://github.com/react-native-maps/react-native-maps).
 
 In the next example, we use `MapView` component to show Haaga-Helia Pasila campus in the map.
+
 ![](img/map1.png)
 
 First, we install `react-native-maps` components:
