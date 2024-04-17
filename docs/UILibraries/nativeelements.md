@@ -6,11 +6,11 @@ sidebar_position: 1
 **React Native Paper** (https://reactnativepaper.com/) is a popular open-source UI library for React Native applications. It provides a set of customizable and pre-designed components that follow Google's Material Design.
 
 ### Installation
-- Install React Native Paper UI library to your project by typing the following command in your project's folder.
+Install React Native Paper UI library to your project by typing the following command in your project's folder.
 ```bash
 npm install react-native-paper
 ```
-- You also have to install `react-native-safe-area-context` to handle safe area. Safe areas are areas of the screen that are guaranteed not to be obstructed by system bars or notches on devices.
+You also have to install `react-native-safe-area-context` to handle safe area. Safe areas are areas of the screen that are guaranteed not to be obstructed by system bars or notches on devices.
 ```bash
 npm install react-native-safe-area-context
 ```
