@@ -16,12 +16,12 @@ const config = {
   url: 'https://haagahelia.github.io',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
-  baseUrl: '/mobileprogramming/',
+  baseUrl: '/mobilecourse/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
   organizationName: 'haagahelia', // Usually your GitHub org/user name.
-  projectName: 'mobileprogramming', // Usually your repo name.
+  projectName: 'mobilecourse', // Usually your repo name.
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
@@ -77,7 +77,7 @@ const config = {
             label: 'Course Material',
           },
           {
-            href: 'https://github.com/facebook/docusaurus',
+            href: 'https://github.com/haagahelia/mobilecourse',
             label: 'GitHub',
             position: 'right',
           },
@@ -112,20 +112,7 @@ const config = {
               },
             ],
           },
-          {
-            title: 'More',
-            items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
-              {
-                label: 'GitHub',
-                href: 'https://github.com/facebook/docusaurus',
-              },
-            ],
-          },
-        ],
+         ],
         copyright: `Mobile Programming © (${new Date().getFullYear()}) is licensed under CC BY-NC-SA 4.0`,      },
       prism: {
         theme: prismThemes.github,
