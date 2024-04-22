@@ -22,14 +22,14 @@ States are needed for title and credit input fields and all courses that are sho
  const [credit, setCredit] = useState('');
  const [title, setTitle] = useState('');
  const [courses, setCourses] = useState([]);
-````
-- Open database (Returns database object) and create it, if it doesn’t exists.
+```
+Next, we intialize the database connection using the `openDatabase` function.  The function takes a single argument, which is the name of the SQLite database file to open or create. If the specified database file exists, it will be opened. If it doesn't exist, a new database file with that name will be created.
 
 ```js
 const db = SQLite.openDatabase('coursedb.db');
 ```
 
-Opening a database returns database object.  The object has method `transaction` which can be used for database operations. Method has three parameters: The first is one is used to execute sql statement. The second one is executed if errors happen. The third one is executed when transaction is completed successfully.
+Opening a database returns database object.  The object has method `transaction` which can be used for database operations. Method has three parameters: The first is one is used to execute sql statement. The second one is an optional error callback function that is called if an error occurs during the transaction. The third one is executed when transaction is completed successfully.
 
 ```js
 db.transaction(callback, error, success)
