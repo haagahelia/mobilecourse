@@ -12,13 +12,18 @@ In the flexbox layout, the parent container becomes the **Flex container**, and 
 
 #### **`flexDirection`**
 
-- Defines the direction how components are organized inside the container (horizontally or vertically). Unlike web flexbox, the default direction in React Native is vertical.
-- `flexDirection` also defines the **primary axis**
-  ![](img/flexdirection.PNG)
+Defines the direction how components are organized inside the container (horizontally or vertically). Unlike web flexbox, the default direction in React Native is vertical.
+
+The `flexDirection` also defines the **primary axis**
+
+There are two primary values for `flexDirection`:
+- `row`: This value sets the primary axis to be horizontal. Items are positioned from left to right along the row.
+- `column`: This value sets the primary axis to be vertical. Items are positioned from top to bottom along the column.
+
+![](img/flexdirection.PNG)
 
 #### **`flex`**
-
-- Defines how the space is divided between multiple flex containers
+Defines how the space is divided between multiple flex containers or items.
 
 ```jsx
 <View style="{{flex:" 1}}>
@@ -29,7 +34,9 @@ In the flexbox layout, the parent container becomes the **Flex container**, and 
 ![w:300 bg right](img/flex.PNG)
 
 #### **`alignItems`**
-- Defines the alignment of childrens in the secondary axis. If `flexDirection` is `row` then the secondary axis is `column` and vice versa. Options include: `center`, `flex-start`, `flex-end`, `stretch`
+Defines the alignment of childrens in the secondary axis. If `flexDirection` is `row` then the secondary axis is `column` and vice versa. 
+
+Options include: `center`, `flex-start`, `flex-end`, `stretch`
 
 ```jsx
 <View style={{flex: 1, flexDirection: 'row',
@@ -44,9 +51,9 @@ In the flexbox layout, the parent container becomes the **Flex container**, and 
 
 
 #### **`justifyContent`**
-- Defines the distribution of childrens in the **primary** axis.
-  -Options include: `center`, `flex-start`, `flex-end`, `space-around`,
-  `space-between`
+Defines the distribution of childrens in the **primary** axis. 
+
+Options include: `center`, `flex-start`, `flex-end`, `space-around`, `space-between`
 
 ```jsx
 <View style={{flex: 1, flexDirection: 'row',

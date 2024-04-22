@@ -9,13 +9,13 @@ Most of the core React Native components has a property called `style` that can 
 ```
 The better way is to use `StyleSheet` component. Styles defined in StyleSheet can be reused across multiple components:
 
-- Import the `StyleSheet` component:
+Import the `StyleSheet` component:
 
 ```js
 import { StyleSheet, Text } from "react-native";
 ```
 
-- StyleSheet `create` method creates a StyleSheet object, which groups styles together and assign each style a unique identifier:
+StyleSheet `create` method creates a StyleSheet object, which groups styles together and assign each style a unique identifier:
 
 ```js
 const styles = StyleSheet.create({
@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
 });
 ```
 
-- Use styles in the component's `style` attribute
+Use styles in the component's `style` attribute
 
 ```jsx
 <Text style="{styles.alerttext}">Red text</Text>
