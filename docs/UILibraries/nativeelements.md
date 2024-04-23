@@ -156,7 +156,7 @@ export default function GitExplorer() {
 
 In this phase, your app should look like the image below:
 
-![](img/GitExplorer1.png)
+![](img/gitexplorer1.png)
 
 #### Fetch
 Next, we implement the network request to fetch repositories. Add the following function in your `GitExplorer` component.

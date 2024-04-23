@@ -6,7 +6,7 @@ React Native uses **Flexbox** as its primary layout system. Flexbox works same w
 
 In the flexbox layout, the parent container becomes the **Flex container**, and all its children become **Flex items**.
 
-![](img/flexbox.PNG)
+![](img/flexbox.png)
 
 ### Common flexbox attributes
 
@@ -20,7 +20,7 @@ There are two primary values for `flexDirection`:
 - `row`: This value sets the primary axis to be horizontal. Items are positioned from left to right along the row.
 - `column`: This value sets the primary axis to be vertical. Items are positioned from top to bottom along the column.
 
-![](img/flexdirection.PNG)
+![](img/flexdirection.png)
 
 #### **`flex`**
 Defines how the space is divided between multiple flex containers or items.
@@ -31,7 +31,7 @@ Defines how the space is divided between multiple flex containers or items.
   <View style="{{flex:" 2}}> Some components goes here - 2/3 space </View>
 </View>
 ```
-![w:300 bg right](img/flex.PNG)
+![w:300 bg right](img/flex.png)
 
 #### **`alignItems`**
 Defines the alignment of childrens in the secondary axis. If `flexDirection` is `row` then the secondary axis is `column` and vice versa. 
