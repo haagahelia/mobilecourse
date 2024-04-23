@@ -34,13 +34,13 @@ To use Firebase, we have to create a project in Firebase.
 
 2. Create a new Firebase project and create new realtime database (Build menu).
 
-![](img/firebase_app.PNG) 
+![](img/firebase_app.png) 
 
 In the Security Rules, you can select **Start in test mode**. You can change security rules later in Realtime Database -> **Rules** tab.
 
 3. Add new App to you Firebase project (**Web app**) 
 
-![](img/firebase_app2.PNG) 
+![](img/firebase_app2.png) 
 
 Now, you can get the initialization code in the App registration phase. Copy the initialization, we will need that later:
 
