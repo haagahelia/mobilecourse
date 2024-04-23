@@ -59,6 +59,7 @@ return (
 
 For more information and examples, refer to the official documentation https://reactnative.dev/docs/text
 
+
 ### Button
 `Button` component provides a basic button for user interaction
 
