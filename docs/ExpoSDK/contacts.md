@@ -58,15 +58,15 @@ const getContacts = async () => {
 ```
 Contact object looks the following (Android)
 
-```json
+```js
 Object {
   "contactType": "person",
-  "firstName": "Juha",
+  "firstName": "Lisa",
   "id": "1",
   "imageAvailable": false,
-  "lastName": "Hinkula",
+  "lastName": "Smith",
   "lookupKey": "0r1-3B5137293739433D513F29",
-  "name": "Juha Hinkula",
+  "name": "Lisa Smith",
   "phoneNumbers": Array [
     Object {
       "id": "1",
@@ -77,7 +77,6 @@ Object {
     },
   ],
 }
-
 ```
 In the `return` statement, we add the `Button` and `Text` components. The button invokes the `getContacts` function and the name of the first contact is shown in the `Text` component.
 
