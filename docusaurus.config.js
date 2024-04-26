@@ -63,6 +63,16 @@ const config = {
         minHeadingLevel: 2,
         maxHeadingLevel: 5,
       },
+      algolia: {
+        // The application ID provided by Algolia
+        appId: 'LC5ULIZ0WS',
+
+        // Public API key: it is safe to commit it
+        apiKey: 'c26ffde8d1af6f8c78ac0d8733f77d77',
+  
+        indexName: 'haagaheliaio',
+        contextualSearch: false,
+      },
       navbar: {
         title: 'Mobile Programming',
         logo: {
