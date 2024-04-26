@@ -2,19 +2,23 @@
 title: "SQLite"
 sidebar_position: 2
 ---
-**SQLite**  (https://www.sqlite.org/) is light-weight SQL database and it is built into both Android and iOS devices.`expo-sqlite` is the library that gives an access to SQLite database.
+**SQLite**  (https://www.sqlite.org/) is light-weight SQL database and it is built into both Android and iOS devices.`expo-sqlite` is the library that gives an access to SQLite database on the device.
 
 Installation:
 ```bash
 npx expo install expo-sqlite 
 ```
+:::note
+  This material uses the Expo SQLite (Next) version of the library (https://docs.expo.dev/versions/latest/sdk/sqlite-next/). 
+:::
+
 Example: Courselist app where user types course title and credits. The course is saved to a database when save button is pressed. All courses are shown in the flatlist component.
 
 ![](img/courselist.png)
 
 First, import the SQLite from `expo-sqlite` to your Component
 ```js
-import * as SQLite from 'expo-sqlite';
+import * as SQLite from 'expo-sqlite/next';
 ```
 States are needed for title and credit input fields and all courses that are shown in the `FlatList`.
 
@@ -23,29 +27,48 @@ States are needed for title and credit input fields and all courses that are sho
  const [title, setTitle] = useState('');
  const [courses, setCourses] = useState([]);
 ```
-Next, we intialize the database connection using the `openDatabase` function.  The function takes a single argument, which is the name of the SQLite database file to open or create. If the specified database file exists, it will be opened. If it doesn't exist, a new database file with that name will be created.
+Next, we intialize the database connection using the `openDatabaseSync` function.  The function takes a single argument, which is the name of the SQLite database file to open or create. If the specified database file exists, it will be opened. If it doesn't exist, a new database file with that name will be created.
 
 ```js
-const db = SQLite.openDatabase('coursedb.db');
+const db = SQLite.openDatabaseSync('coursedb');
 ```
 
-Opening a database returns database object.  The object has method `transaction` which can be used for database operations. Method has three parameters: The first is one is used to execute sql statement. The second one is an optional error callback function that is called if an error occurs during the transaction. The third one is executed when transaction is completed successfully.
+:::note
+  The library has synchronous and asynchronous versions of functions. Running heavy tasks with synchronous functions can block the JavaScript thread and affect performance.
+
+  We will be using mostly asynchronous functions in this example. For simplicity, we make here a synchronous call to open the database.
+:::
+
+Opening the database returns database object. Using the methods of the database object we can make SQL queries. 
+
+First we need create the database schema in case this is the first invocation of the application. We write a function to create the schema and use the `execAsync` method to make the SQL query.
 
 ```js
-db.transaction(callback, error, success)
+const initialize = async () => {
+  try {
+    await db.execAsync(`
+      CREATE TABLE IF NOT EXISTS course (id INTEGER PRIMARY KEY NOT NULL, credits INT, title TEXT);
+    `);
+    // Todo: update the course list
+  } catch (error) {
+    console.error('Could not open database', error);
+  }
+}
 ```
-Database is created in the `useEffect` hook by using transaction's `executeSql` method.
+:::note
+  Because we use the `async`-`await`syntax to handle the asynhronous calls we need to use exception handling to handle possible database errors. 
+:::
+
+The application logic would require that we retrieve the course list from the database and render it for the user at startup. The function to do that will be implemented later. 
+
+We make only one query but multiple queries could be done in one `execAsync` call. For that reason we need to terminate the query with a semicolon (`;`).
+
+The database initialization function is called using the `useEffect` hook. 
 
 ```js
-  useEffect(() => {
-    db.transaction(tx => {
-      tx.executeSql('create table if not exists course (id integer primary key not null, credits int, title text);');
-    }, () => console.error("Error when creating DB"), updateList);  
-  }, []);
+useEffect(() => { initialize() }, []);
 ```
-The `updateList` function fetch all courses from the database and updates the `FlatList` (code is shown later).
-
-In the `return` statement we rended two input fields (title and credits) and button which saves item to database when it is pressed. The button will execute `saveItem` function which handles `insert` operation to database.
+Next we need a way to create content in the database. We add two input fields (title and credits) and a button to save the new item to the database when pressed. The button will call function `saveItem`.
 
 ```jsx
 <TextInput 
@@ -59,47 +82,128 @@ In the `return` statement we rended two input fields (title and credits) and but
   value={credit}/> 
 <Button onPress={saveItem} title="Save" />
 ```
-The `saveItem` function uses `executeSql` method to insert new item in the course table. The `updateList` function is executed after successful insert. Query argument array is the second parameter in executeSql method (substitutes ?-marks in the SQL statement)
+We write function `saveItem` to make the `INSERT` query to add rows into the database. We use `runAsync` method to make the query. 
 
 ```js
-const saveItem = () => {
-  db.transaction(tx => {
-    tx.executeSql('insert into course (credits, title) values (?, ?);',
-	  [parseInt(credit), title]);
-    }, null, updateList)
-}
+const saveItem = async () => {
+  try {
+    await db.runAsync('INSERT INTO course VALUES (?, ?, ?)', null, credit, title);
+    // Todo: update the course list
+  } catch (error) {
+    console.error('Could not add item', error);
+  }
+};
 ```
-The `updateList` function fetch all items from the course table and save data to `courses` state (-> re-render).  The third parameter of the `executeSql` function is success function which takes resultset object as a second argument. The Resultset object contains `rows._array` which is the array of rows returned by query.
+
+Finally we can implement the function `updateList` to get the list of courses from the database. The function makes a `SELECT` query using method `getAllAsync` to fetch all rows from the course table and updates the data to state variable `courses`. The state update launches a re-render.
 
 ```js
-const updateList = () => {
-  db.transaction(tx => {
-    tx.executeSql('select * from course;', [], (_, { rows }) =>
-      setCourses(rows._array)
-    ); 
-  }, null, null);
-}
+  const updateList = async () => {
+    try {
+      const list = await db.getAllAsync('SELECT * from course');
+      setCourses(list);
+    } catch (error) {
+      console.error('Could not get items', error);
+    }
+  }
 ```
-In the `FlatList` component, we show title and credits of the courses. Each rows contains also `Text` component that executes `deleteItem` function when it is pressed. The unique id of the item is passed to the delete function.
+
+The `updateList` function should be executed at first render and after any successful change in the database. Add the `updateList` call to the placeholders in the functions defined earlier.
+
+In the `FlatList` component, we show the title and credits of the courses. For deleting courses we add a `Text` component on each row and attach an `onPress` action to that calls function `deleteItem` to each component. The unique id of the item is passed to the delete function.
 
 ```jsx
-<FlatList 
-  style={{marginLeft : "5%"}}
-  keyExtractor={item => item.id.toString()} 
-  renderItem={({item}) => 
-    <View style={styles.listcontainer}>
-      <Text>{item.title},{item.credits} </Text>
-      <Text style={{color: '#0000ff'}} onPress={() => deleteItem(item.id)}>done</Text>
-    </View>}     	
-  data={courses} 
-/> 
+<FlatList
+  keyExtractor={item => item.id.toString()}
+  renderItem={({ item }) =>
+    <View style={styles.itemcontainer}>
+      <Text>{item.title}</Text>
+      <Text>{item.credits} </Text>
+      <Text style={{ color: '#0000ff' }} onPress={() => deleteItem(item.id)}>done</Text>
+    </View>}
+  data={courses}
+/>
 ```
-The `deleteItem` function deletes item from the course table and updates flatlist after the deletion.
+
+The `deleteItem` function deletes item from the course table and updates the course list after the deletion.
 
 ```js
-const deleteItem = (id) => {
-  db.transaction(
-  tx => tx.executeSql('delete from course where id = ?;', [id]);}, null, updateList) 
+const deleteItem = async (id) => {
+    console.log('deleteItem')
+    try {
+      await db.runAsync('DELETE FROM course WHERE id=?', id);
+      await updateList();
+    }
+    catch (error) {
+      console.error('Could not delete item', error);
+    }
+  }
+```
+
+### Using `SQLiteProvider` component
+
+If there are sevaral components in the application, `SQLiteProvider` component can be used to share the database across the components. All components rendered within a `SQLiteProvider` can access the database using the `useSQLiteContext` hook.
+
+Let us refactor the application into two components: `App` provides the database context to all component within the app and `Courselist` renders the course list application.
+
+```js title="App.jsx"
+import { SQLiteProvider } from 'expo-sqlite/next';
+import Courselist from './Courselist';
+
+export default function App() {
+
+  const initialize = async (db) => {
+    db.execAsync(`
+      CREATE TABLE IF NOT EXISTS course (id INTEGER PRIMARY KEY NOT NULL, credits INT, title TEXT);
+    `);
+  };
+
+  return (
+    <SQLiteProvider
+      databaseName='coursedb.db'
+      onInit={initialize}
+      onError={error => console.error('Could not open database', error)}
+    >
+      <Courselist />
+    </SQLiteProvider>
+  );
 }
 ```
 
+`SQLIteProvider` properties:
+- `databaseName` defines the database file name. `SQLiteProvider` takes care of opening the database. 
+- `onInit ` defines an initialization handler that is run before rendering the children of the component. We use it to create the database schema.
+- `onError` handler is called if an error occurs.
+
+The `Courselist` component gets the database object by calling the `useSQLiteContext` hook. 
+
+```js title="Courselist.jsx"
+// highlight-next-line
+import { useSQLiteContext } from 'expo-sqlite/next';
+// ...
+
+export default function Courselist() {
+  const [credit, setCredit] = useState('');
+  const [title, setTitle] = useState('');
+  const [courses, setCourses] = useState([]);
+
+  // highlight-next-line
+  const db = useSQLiteContext();
+
+  const saveItem = async () => {
+    try {
+      await db.runAsync('INSERT INTO course VALUES (?, ?, ?)', null, credit, title);
+      await updateList();
+    } catch (error) {
+      console.error('Could not add item', error);
+    }
+  };
+
+  // ...
+
+  // highlight-next-line
+  useEffect(() => { updateList() }, []);
+
+  // ...
+```
+Because the database initialization is done in an other component, we need to launch the initial list update using the `useEffect` hook.
