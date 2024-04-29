@@ -16,7 +16,7 @@ sidebar_position: 1
 
 ### Building standalone apps for Android and iOS
 - In order to be able to deploy standalone apps we need to create different native builds for the different platforms
-- This can be done using Expo Application Services (EAS) tools:
+- This can be done using **Expo Application Services (EAS)** tools (https://expo.dev/eas):
 ```bash
 npm install -g eas-cli    # install EAS tools globally
 eas login                 # you need to have an Expo account to use EAS
@@ -27,9 +27,8 @@ eas build:configure       # create EAS configuration for your project
 
 <p> https://docs.expo.dev/build/setup/ </p>
 
-
 ### Building for internal distribution on Android
-- For Android you can buyild an apk-binary that can be installed on an emulator or a device directly.
+- For Android you can build an apk-binary that can be installed on an emulator or a device directly.
 - You may need to modify the build profile definition in `eas.json`
 ```json
 {
@@ -62,7 +61,7 @@ https://docs.expo.dev/build-reference/apk/
 ```
 - Run build
 ```bash
-$ eas build -p ios --profile preview
+eas build -p ios --profile preview
 ```
 - When the build is complete, download and install the binary on an emulator or a device.
 
