@@ -6,7 +6,7 @@ sidebar_position: 3
 
 Firebase provides **Realtime Database** that is NoSQL cloud database. Data is stored as JSON and synchronized in realtime to every connected client. 
 
-To use the Firebase Realtime Database with React Native, you can use **Firebase JavaScript SDK** or **React Native Firebase**. In this material, we are using the JavaScript SDK.
+To use the Firebase Realtime Database with React Native, you can use **Firebase JavaScript SDK** or **React Native Firebase**. In this material, we are using the JavaScript SDK (https://firebase.google.com/docs/database/web/start).
 ### Installation
 You can install Firebase JavaScript SDK using the following command:
 ```bash
