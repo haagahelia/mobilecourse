@@ -8,9 +8,6 @@ Installation:
 ```bash
 npx expo install expo-sqlite 
 ```
-:::note
-  This material uses the Expo SQLite (Next) version of the library (https://docs.expo.dev/versions/latest/sdk/sqlite-next/). 
-:::
 
 Example: Courselist app where user types course title and credits. The course is saved to a database when save button is pressed. All courses are shown in the flatlist component.
 
