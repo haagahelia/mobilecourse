@@ -15,7 +15,7 @@ In this example, users can take a photo which is then displayed in the app. The 
 
 Import `Camera` and `useCameraPermissions` from `expo-camera` to your component. The `useCameraPermissions` is hook function to check or request permissions to access the camera.
 ```js
-import { Camera, useCameraPermissions } from 'expo-camera/next';
+import { Camera, useCameraPermissions } from 'expo-camera';
 ```
 We use states to store photo data. We also have to create a `ref` to camera component using `useRef` hook. By using `ref` we can get access to camera component's methods.
 

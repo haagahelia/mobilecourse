@@ -18,7 +18,7 @@ Example: Courselist app where user types course title and credits. The course is
 
 First, import the SQLite from `expo-sqlite` to your Component
 ```js
-import * as SQLite from 'expo-sqlite/next';
+import * as SQLite from 'expo-sqlite';
 ```
 States are needed for title and credit input fields and all courses that are shown in the `FlatList`.
 
@@ -147,7 +147,7 @@ If there are sevaral components in the application, `SQLiteProvider` component c
 Let us refactor the application into two components: `App` provides the database context to all component within the app and `Courselist` renders the course list application.
 
 ```js title="App.jsx"
-import { SQLiteProvider } from 'expo-sqlite/next';
+import { SQLiteProvider } from 'expo-sqlite';
 import Courselist from './Courselist';
 
 export default function App() {
@@ -179,7 +179,7 @@ The `Courselist` component gets the database object by calling the `useSQLiteCon
 
 ```js title="Courselist.jsx"
 // highlight-next-line
-import { useSQLiteContext } from 'expo-sqlite/next';
+import { useSQLiteContext } from 'expo-sqlite';
 // ...
 
 export default function Courselist() {
