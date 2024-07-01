@@ -10,7 +10,7 @@ Linux and macOS users have to install Watchman (https://docs.expo.io/get-started
 ### Create your first app
 
 #### Initialize project 
-You can create a new React Native app using the following commands in terminal:
+You can create a new React Native app using the following command in terminal:
 ```bash
 npx create-expo-app YOUR_APP_NAME
 ```
