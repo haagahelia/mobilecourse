@@ -43,7 +43,7 @@ The demo app that Expo creates looks like the following screenshot.
 You can stop the project by pressing Ctrl-C in the terminal. 
 
 #### Modify your app
-Open your expo project using the VSCode. Modify the `return` statement in the **index.tsx** file. Expo provides **Fast Refresh** and you will see changes immediately in your mobile device.
+Open your expo project using the VSCode. Modify the `return` statement in the **App.js** file. Expo provides **Fast Refresh** and you will see changes immediately in your mobile device.
 
 You can open developer menu in the Expo Go app by shaking your device. There is also manual refresh option if expo fast refresh doesn't work.
 
