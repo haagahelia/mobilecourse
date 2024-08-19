@@ -26,9 +26,9 @@ There are two primary values for `flexDirection`:
 Defines how the space is divided between multiple flex containers or items.
 
 ```jsx
-<View style="{{flex:" 1}}>
-  <View style="{{flex:" 1}}> Some components goes here - 1/3 space </View>
-  <View style="{{flex:" 2}}> Some components goes here - 2/3 space </View>
+<View style={{flex: 1}}>
+  <View style={{flex: 1}}> Some components goes here - 1/3 space </View>
+  <View style={{flex: 2}}> Some components goes here - 2/3 space </View>
 </View>
 ```
 ![w:300 bg right](img/flex.png)
