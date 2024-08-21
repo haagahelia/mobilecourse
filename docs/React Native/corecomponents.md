@@ -147,7 +147,7 @@ Render the `TextInput` component.
   value={text} 
 />
 ```
-The `placeholder`  prop sets the placeholder text that appears in the input field when it's empty. 
+The `placeholder` prop sets the placeholder text that appears in the input field when it's empty. 
 
 The `onChangeText` prop specifies the function that will be called whenever the text input changes. This means that whenever the user types something into the input field, the `text` state will be updated with the new value. 
 
