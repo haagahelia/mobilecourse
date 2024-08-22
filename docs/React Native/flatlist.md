@@ -20,7 +20,7 @@ import {
   FlatList,
 } from "react-native";
 ```
-- Declare new states to manage text input and FlatList items:
+- Declare new states to manage text input value and FlatList items:
 ```js
 const [todo, setTodo] = useState("");
 const [todos, setTodos] = useState([]);
@@ -38,7 +38,7 @@ return (
   </View>
 );
 ```
-- The `handlePress` function is called when the "Add" button is pressed. This function adds the current value of the `todo` state (representing the new task) to the `todos` state array. After adding the task to the array, the `todo` state is reset to an empty string, clearing the `TextInput` for the next task input.
+- The `handlePress` function is called when the Add button is pressed. This function adds the current value of the `todo` state (representing the new task) to the `todos` state array. After adding the task to the array, the `todo` state is reset to an empty string, clearing the `TextInput` for the next task input.
 ```js
 const handlePress = () => {
   setTodos([...todos, { key: todo }]);
