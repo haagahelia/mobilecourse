@@ -31,3 +31,9 @@ Use styles in the component's `style` attribute
 ```jsx
 <Text style="{styles.alerttext}">Red text</Text>
 ```
+
+:::info[Task]
+Continue with the Todolist app created in the Flatlist section. Add a style for the list item using `StyleSheet` to have a light blue background and rounded corners as shown in the following image.
+
+![](img/liststyle.png)
+:::
