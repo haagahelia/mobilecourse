@@ -22,6 +22,10 @@ import {
 ```
 - Declare new states to manage text input value and FlatList items:
 ```js
+// import useState
+import { useState } from 'react';
+
+// declare states
 const [todo, setTodo] = useState("");
 const [todos, setTodos] = useState([]);
 ```
@@ -53,5 +57,11 @@ const handlePress = () => {
 />
 ```
 - The `renderItem` prop defines how data items are rendered within the list. The `data` prop indicates the source of the data, which must be an array. The `keyExtractor` prop extracts a unique key for each item in the list. It that is not defined, index will be used.
+
+:::note[Task]
+Read the `FlatList` documentation in https://reactnative.dev/docs/flatlist. 
+- Add `ListEmptyComponent` to show text "No data" when the list is empty.
+- Use `ItemSeparatorComponent` to render thin line between each list item. You can create a `View` with a height of 1 and a background color to render a line separator between items in a `FlatList`.
+:::
 
 
