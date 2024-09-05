@@ -137,4 +137,10 @@ Finally, we use conditional rendering to display `ActivityIndicator` component w
   );
 }
 ```
+:::info[Task]
+Refactor the GitHub API app by splitting it into smaller, more manageable components. Specifically:
 
+- Create a separate component for the list that displays repositories.
+- Create a separate file for the REST API calls.
+- Read the next section about environment variables and configure the API URL to be read from a `.env` file.
+:::
