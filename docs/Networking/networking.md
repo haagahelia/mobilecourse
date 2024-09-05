@@ -100,21 +100,16 @@ const handleFetch = () => {
   setLoading(true); // Set loading state to true before fetch
     
   fetch(`https://api.github.com/search/repositories?q=${keyword}`)
-  .then(response => {
-    // highlight-next-line
-    setLoading(false); // Set loading state to false after fetch
-      
+  .then(response => {    
     if (!response.ok)
       throw new Error("Error in fetch:" + response.statusText);
       
     return  response.json()
   })
   .then(data => setRepositories(data.items))
-  .catch(err => {
-    // highlight-next-line
-    setLoading(false); // Set loading state to false in case of error
-    console.error(err);
-  });    
+  .catch(err => console.error(err))
+  // highlight-next-line
+  .finally(() => setLoading(false)); // Set loading state to false   
 }
 ```
 Finally, we use conditional rendering to display `ActivityIndicator` component when the `loading` state is `true`.
