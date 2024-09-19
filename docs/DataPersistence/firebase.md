@@ -167,7 +167,11 @@ useEffect(() => {
   const itemsRef = ref(database, 'items/');
   onValue(itemsRef, (snapshot) => {
     const data = snapshot.val();
-    setItems(Object.values(data));
+    if (data) {
+      setItems(Object.values(data));
+    } else {
+      setItems([]); // Handle the case when there are no items
+    }
   })
 }, []);
 ```
