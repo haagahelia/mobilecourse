@@ -107,9 +107,9 @@ const handleSave = () => {
 return (  
   <View style={styles.container}>
     <TextInput 
-      placeholder='Product name' 
-      onChangeText={text => setProduct({...product, name: text})}
-      value={product.name}/>  
+      placeholder='Product title' 
+      onChangeText={text => setProduct({...product, title: text})}
+      value={product.title}/>  
     <TextInput 
       placeholder='Amount' 
       onChangeText={text => setProduct({...product, amount: text})}
@@ -176,7 +176,7 @@ Finally, we add `FlatList` component and display products that are saved to the 
 <FlatList 
   renderItem={({item}) => 
     <View style={styles.listcontainer}>
-      <Text style={{fontSize: 18}}>{item.name}, {item.amount}</Text>
+      <Text style={{fontSize: 18}}>{item.title}, {item.amount}</Text>
     </View>} 
   data={items} />      
 ```
