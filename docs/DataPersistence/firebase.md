@@ -42,7 +42,7 @@ In the Security Rules, you can select **Start in test mode**. You can change sec
 
 ![](img/firebase_app2.png) 
 
-Now, you can get the initialization code in the App registration phase. Copy the initialization, we will need that later:
+Now, you can get the initialization code in the App registration phase. Copy the initialization code, we will need that later:
 
 ```js
 // Import the functions you need from the SDKs you need
