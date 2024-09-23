@@ -7,7 +7,6 @@ There are many UI component libraries available for React Native. UI libraries p
 In this course, we are using React Native Paper (https://reactnativepaper.com/)
 
 Other options:
-- Native Base - https://nativebase.io/
+- Gluestack-ui - https://gluestack.io/
 - React Native Elements - https://reactnativeelements.com/
 - Awesome React Native - https://github.com/jondot/awesome-react-native
-
