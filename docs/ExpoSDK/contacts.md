@@ -14,19 +14,19 @@ First, we have to import the `expo-contacts` and `expo-sms`.
 import * as Contacts from 'expo-contacts';
 import * as SMS from 'expo-sms';
 ```
-Next, we check permission to be able to access the device’s contacts. 
+Next, we check permission to be able to access the device’s contacts. The  `requestPermissionsAsync()` function is called to request permission to access the contacts on the user's device. It returns a promise that resolves to a `PermissionResponse` object. We destruct the resolved object to extract the `status` property.
 
 ```js
 const { status } = await Contacts.requestPermissionsAsync();
 ```
-If the permission exists, the status value is `granted`.
+The value of `status` is `granted` if user has granted the permission. 
 
 ```js
 if (status === 'granted') {
   // Access contacts 
 }
 ```
-The `getContactsAsync(query)` method is used to get contacts from your device and it is asynchronous. It returns an array of contact objects.
+The `getContactsAsync(query)` method is used to get contacts from your device and it is asynchronous. The `query` is an optoinal object that can contain properties to filter and sort the contacts. The `getContactsAsync` method returns a promise that resolves to a `ContactResponse` object. The object contains `data` property that is an array of contacts that match a given query.
 
 ```js
 const getContacts = async () => {
@@ -38,7 +38,7 @@ const getContacts = async () => {
    }
 }
 ```
-In the function's `query` argument we define that we want to get phone numbers. You can also use for example, `Contacts.Fields.Emails` to get email addresses. Then, we can check if there are contacts available, and save the first contact object to a state.
+In the function's `query`, we define that we want to get phone numbers. You can also use for example, `Contacts.Fields.Emails` to get email addresses. Then, we can check if there are contacts available, and save the first contact object to a state.
 
 ```js
 const [contact, setContact] = useState({});
@@ -78,7 +78,7 @@ Object {
   ],
 }
 ```
-In the `return` statement, we add the `Button` and `Text` components. The button invokes the `getContacts` function and the name of the first contact is shown in the `Text` component.
+In the `return` statement, we add the `Button` and `Text` components. The button execute the `getContacts` function and the name of the first contact is displayed in the `Text` component.
 
 ```jsx
 return (
@@ -109,7 +109,7 @@ const sendSms = async () => {
   }
 }
 ```
-The SMS message can be sent using the `sendSMSAsync()` method. The first argument is an array of phone numbers and the second argument is a message.
+The SMS message can be sent using the `sendSMSAsync(addresses, message, options)` method. The first argument is an array of phone numbers and the second argument is a message to be sent. The third optional argument can be used to define additional SMS configuration options. The `sendSMSAsync`returns a promise that resolves to an object containing the result of the SMS sending operation (sent, cancelled, unknown). 
 
 ```js
 const sendSms = async () => {
