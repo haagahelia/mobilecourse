@@ -298,16 +298,15 @@ const handleFetch = () => {
   .then(response => {
     if (!response)
       throw new Error("Error in fetch: " + response.statusText);
-    // highlight-next-line
-    setLoading(false);
+ 
     return response.json();
   })
   .then(data => setRepositories(data.items))
   .catch(err =>  { 
-    // highlight-next-line
-    setLoading(false);
     console.error(err);
   })
+  // highlight-next-line
+  .finally(() => setLoading(false))
 }
 ```
 In the Search button the loading prop is passed as `loading={loading}`, meaning it takes the value of the `loading` state defined in the component's state.
