@@ -6,4 +6,4 @@ In React Native Expo apps, permissions are needed when your application requires
 
 Permissions ensure that users have control over what information and capabilities your app can access on their device.
  
- SOME EXAMPLE HERE
+UNDER CONSTRUCTION !!!!
