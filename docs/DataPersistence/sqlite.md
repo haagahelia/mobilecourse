@@ -84,7 +84,7 @@ We write function `saveItem` to make the `INSERT` query to add rows into the dat
 ```js
 const saveItem = async () => {
   try {
-    await db.runAsync('INSERT INTO course VALUES (?, ?, ?)', null, credit, title);
+    await db.runAsync('INSERT INTO course (title, credits) VALUES (?, ?)', title, credit);
     // Todo: update the course list
   } catch (error) {
     console.error('Could not add item', error);
@@ -126,7 +126,6 @@ The `deleteItem` function deletes item from the course table and updates the cou
 
 ```js
 const deleteItem = async (id) => {
-    console.log('deleteItem')
     try {
       await db.runAsync('DELETE FROM course WHERE id=?', id);
       await updateList();
