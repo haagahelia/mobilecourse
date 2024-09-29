@@ -142,7 +142,7 @@ const handleSave = () => {
 Let's also add check that empty products are not saved:
 ```js
 const handleSave = () => {
-  if (product.amount && product.name) {
+  if (product.amount && product.title) {
     push(ref(database, 'items/'), product);
   }
   else {
