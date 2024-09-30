@@ -26,7 +26,7 @@ if (status === 'granted') {
   // Access contacts 
 }
 ```
-The `getContactsAsync(query)` method is used to get contacts from your device and it is asynchronous. The `query` is an optoinal object that can contain properties to filter and sort the contacts. The `getContactsAsync` method returns a promise that resolves to a `ContactResponse` object. The object contains `data` property that is an array of contacts that match a given query.
+The `getContactsAsync(query)` method is used to get contacts from your device and it is asynchronous. The `query` is an optional object that can contain properties to filter and sort the contacts. The `getContactsAsync` method returns a promise that resolves to a `ContactResponse` object. The object contains `data` property that is an array of contacts that match a given query.
 
 ```js
 const getContacts = async () => {

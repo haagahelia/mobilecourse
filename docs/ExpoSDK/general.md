@@ -6,7 +6,7 @@ The **Expo SDK** provides access to device and system functionality such as cont
 
 Expo SDK packages can be installed unsing the following command:
 ```bash
-npm expo install [package]
+npx expo install [package]
 ```
 
 In this section, we will learn some common packages and you can find the list of all packages in https://docs.expo.dev/versions/latest/.
