@@ -12,7 +12,7 @@ npm install react-native-paper
 ```
 You also have to install `react-native-safe-area-context` to handle safe area. Safe areas are areas of the screen that are guaranteed not to be obstructed by system bars or notches on devices.
 ```bash
-npm install react-native-safe-area-context
+npx expo install react-native-safe-area-context
 ```
 In the following example project, we will learn some of the components that library provides.
 
@@ -75,20 +75,18 @@ export default function App() {
 }
 ```
 #### App header
-Next, we will implement application app bar. Top app bars display navigation, actions, and text at the top of a screen. React Native Paper provides component `Appbar` that we will display in our `App` component. The `mode` prop defines the size height of the Appbar and `center-align` use the default height and center-align title text. 
+Next, we will implement application app bar. Top app bars display navigation, actions, and text at the top of a screen. React Native Paper provides component `Appbar` that we will display in our `App` component. The `mode` prop defines the height of the Appbar (small, medium, large, center-aligned).
 
 ```jsx title="App.js
-import { PaperProvider } from 'react-native-paper';
+import { PaperProvider, Appbar } from 'react-native-paper';
 import { StatusBar } from 'expo-status-bar';
-// highlight-next-line
-import { Appbar } from 'react-native-paper';
 import GitExplorer from './GitExplorer'
 
 export default function App() {
   return (
     <PaperProvider>
       // highlight-start
-      <Appbar mode="center-aligned" elevated>
+      <Appbar mode="medium" elevated>
         <Appbar.Content title="GitExplorer" />
       </Appbar>
        // highlight-end
