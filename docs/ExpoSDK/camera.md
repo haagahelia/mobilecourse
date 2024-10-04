@@ -19,7 +19,7 @@ import { CameraView, useCameraPermissions } from 'expo-camera';
 ```
 We use states to store photo data. We also have to create a `ref` to camera component using `useRef` hook. By using `ref` we can get access to camera component's methods.
 
-We check the permission to access camera by using the `useCameraPermissions` hook and the `permission` state value is `granted` if user has granted the permission.
+We use the `useCameraPermissions` hook to check the camera access permission. If the permission has been granted by the user, the permission value will be set to `granted`. To request permission from the user, we can call the `requestPermission` function.
 
 ```js
 const [photoName, setPhotoName] = useState('');
@@ -28,23 +28,37 @@ const [permission, requestPermission] = useCameraPermissions();
 
 const camera = useRef(null);
 ```
-In the `return` statement, we use conditional rendering. If the app has no permission to use camera we show a text 'No access to camera'.  Otherwise camera, photo previews and button are rendered.
+In the `return` statement, we use conditional rendering. If the app has no permission to use camera, we show a button to prompt the user for permission. Otherwise camera, photo previews and button are rendered.
 
 ```jsx
+if (!permission) {
+  // Camera permissions are still loading.
+  return <View />;
+}
+
+if (!permission.granted) {
+  // Camera permissions are not granted yet.
+  return(
+    <View style={styles.container}>
+      <Button onPress={requestPermission} title="grant permission" />
+    </View>
+  );
+}
+
 return (
-  <View style={styles.container}>
-    {permission === 'granted' ? (
-        <View style={{ flex: 1 }}>
-          <CameraView style={{ flex: 1, minWidth: "100%" }} ref={camera} />
-          <Button title="Take Photo" onPress={snap} />
-          <View style={{ flex: 1 }}>
-            <Image style={{ flex: 1 }} source={{ uri: photoName }} />
-            <Image style={{ flex: 1 }} source={{ uri: `data:image/jpg;base64,${photoBase64}` }} />
-          </View>
-        </View>
+  <View style={{ flex: 1 }}>
+    <CameraView style={{ flex: 1, minWidth: "100%" }} ref={camera} />
+    <Button title="Take Photo" onPress={snap} />
+    <View style={{ flex: 1 }}>
+      {photoName && photoBase64 ? (
+        <>
+          <Image style={{ flex: 1 }} source={{ uri: photoName }} />
+          <Image style={{ flex: 1 }} source={{ uri: `data:image/jpg;base64,${photoBase64}` }} />
+        </>
       ) : (
-        <Text>No access to camera</Text>
-      )}
+        <Text>No photo taken yet.</Text>
+      )}      
+    </View>
   </View>
 );
 ```
