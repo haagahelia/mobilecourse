@@ -34,7 +34,7 @@ Create a new Expo project and install React Native Paper UI library and react-na
 npx create-expo-app gitexplorer
 cd gitexplorer
 npm install react-native-paper
-npm install react-native-safe-area-context
+npx expo install react-native-safe-area-context
 ```
 Let's first create a new component `GitExplorer`:
 
@@ -119,7 +119,6 @@ export default function GitExplorer() {
 }
 
 ```
-
 Then, we render `TextInput` component that allows user to input keyword that is used in the fetch request. The React Native Paper `TextInput` component have similar props than React Native component (such as value, onChange etc.). React Native Paper `TextInput` provides additional props for Material Design-specific features such as `label`. The `label` prop is used to provide a floating label for the input field.  
 
 The React Native `Button` component renders a basic button with platform-specific styling. It has a simple appearance and is not highly customizable in terms of design. React Native Paper's `Button` component, on the other hand, follows Material Design guidelines and offers more styling options out of the box. In our app we are using contained button and that can be defined using the `mode` props. We also display web search icon in our button using the `icon` props. See the list of supported icons in https://callstack.github.io/react-native-paper/docs/guides/icons.
