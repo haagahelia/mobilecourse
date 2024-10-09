@@ -162,7 +162,7 @@ Next, we implement the network request to fetch repositories. Add the following 
 const handleFetch = () => {
   fetch(`https://api.github.com/search/repositories?q=${keyword}`)
   .then(response => {
-    if (!response)
+    if (!response.ok)
       throw new Error("Error in fetch: " + response.statusText);
 
     return response.json();
