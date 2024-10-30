@@ -64,4 +64,6 @@ Read the `FlatList` documentation in https://reactnative.dev/docs/flatlist.
 - Use `ItemSeparatorComponent` to render thin line between each list item. You can create a `View` with a height of 1 and a background color to render a line separator between items in a `FlatList`.
 :::
 
+There is also `FlashList` component (https://shopify.github.io/flash-list/) that is developed by Shopify.  It is designed to handle large datasets efficiently. It is optimized for memory usage and it is suitable for applications that require smooth scrolling and rendering of large lists.
+
 
