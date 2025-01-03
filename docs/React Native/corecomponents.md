@@ -194,4 +194,12 @@ source={{uri: 'IMAGE_URI'}}
 
 ![](img/image.png)
 
+### Safe area
+
+"Safe area" is the part of the screen that is not covered by things like the status bar or home button on your device. It makes sure that important parts of your app are always visible and not hidden by these elements.
+
+React Native provides `SafeAreaView` component  but that support only iOS devices.
+
+You can use the `react-native-safe-area-context` library (https://reactnative.dev/docs/safeareaview), which supports both iOS and Android devices. This library provides a `SafeAreaView` component that works across platforms.
+
 For additional core components, refer to the following link https://reactnative.dev/docs/components-and-apis
