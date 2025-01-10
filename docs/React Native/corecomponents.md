@@ -76,7 +76,7 @@ return (
   </View>
 );
 ```
-Pressing the button will show an alert. Note: You have to import also `Alert` component.
+Pressing the button will show an alert. Note: You have to import also `Alert` component. Read more about `Alert` in https://reactnative.dev/docs/alert. 
 ```js
 const buttonPressed = () => {
   Alert.alert("Button pressed");
