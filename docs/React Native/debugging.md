@@ -26,6 +26,10 @@ You can also use the Expo developer menu to open the React Native Devtools. To o
 
 ![](img/devtools.png)
 
+:::note
+React Native Devtools requires either Google Chrome or Microsoft Edge installed. 
+:::
+
 The **Console** tab can be uaed to see logged messages and inspect objects.
 
 The **Sources** tab can be used to view source files, set breakpoints to your source code, monitor variables and watch expressions.
