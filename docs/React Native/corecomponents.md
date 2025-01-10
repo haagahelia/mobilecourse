@@ -200,6 +200,6 @@ source={{uri: 'IMAGE_URI'}}
 
 React Native provides `SafeAreaView` component  but that support only iOS devices.
 
-You can use the `react-native-safe-area-context` library (https://reactnative.dev/docs/safeareaview), which supports both iOS and Android devices. This library provides a `SafeAreaView` component that works across platforms.
+You can use the `react-native-safe-area-context` library (https://docs.expo.dev/versions/latest/sdk/safe-area-context/), which supports both iOS and Android devices. This library provides a `SafeAreaView` component that works across platforms.
 
 For additional core components, refer to the following link https://reactnative.dev/docs/components-and-apis
