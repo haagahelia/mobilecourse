@@ -19,15 +19,17 @@ console.warn("Hello there");
 ```
 ![](img/consoleWarn.png)
 
-### Debugging using Chrome Devtools
-You can use Chrome DeveTools for debugging the Expo apps. Open the developer menu by pressing ***m*** in the terminal.
+### Debugging using React Native Devtools
+You can use Chrome DeveTools for debugging the Expo apps. Open the DevTools by pressing ***j*** in the terminal when you app is running.
 
-![](img/expodev.png)
+You can also use the Expo developer menu to open the React Native Devtools. To open the menu, shake your device. The Expo developer menu allows you to reload your app on the device (if fast refresh doesn't work). You can open the React Native Devtools by selecting **Open JS debugger** from the menu.
 
-Select ***Open JS Debugger*** from the menu. That opens Chrome DevTools. You can set breakpoints in the Sources tab as shown in the next screenshot:
+![](img/devtools.png)
 
-![w:500 bg right](img/chromedev.png)
+The **Console** tab can be uaed to see logged messages and inspect objects.
 
-You can also debug network requests in the Network tab.
+The **Sources** tab can be used to view source files, set breakpoints to your source code, monitor variables and watch expressions.
 
-- There is also VS Code Expo Tools extension that can be used for debugging (https://github.com/expo/vscode-expo#readme)
+The **Components** tab can be used to inspect your app's component hierarchy. You can view component props and states.
+
+Read more in https://reactnative.dev/docs/react-native-devtools.
