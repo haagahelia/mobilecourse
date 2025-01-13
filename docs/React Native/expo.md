@@ -59,7 +59,8 @@ return (
 ![w:300 bg right](img/hello.png)
 
 :::note
-If you can't get app loading to your device, you can use tunnel connection type. Start your app using the following command:
+If you can't get app loading to your device, you can use tunnel connection type.   This option uses an externally managed tunneling service to allow your device to connect to the development server even if it's not on the same local network.
+Start your app using the following command:
 
 ```bash
 npx expo start --tunnel
