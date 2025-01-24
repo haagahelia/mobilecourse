@@ -125,6 +125,28 @@ export default function App() {
 ```
 Now, we should see the bottom tab naviagtor in our app and we are able to navigate between two components.
 
+:::note
+React Navigation offers two methods for implementing routing: **static** and **dynamic**.  In this material we use the dynamic (component) method where routing is defined using components. In the static method, routing is defined  using objects. For example, the previous example look like this when using static navigation:
+
+```jsx
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStaticNavigation } from '@react-navigation/native';
+
+const Tabs = createBottomTabNavigator({
+  screens: {
+    Home: HomeScreen,
+    Settings: SettingsScreen,
+  },
+});
+
+const Navigation = createStaticNavigation(RootStack);
+
+export default function App() {
+  return <Navigation />;
+}
+```
+:::
+
 #### Tab icons
 Expo provides icon library that can be used to show icons in your app (https://docs.expo.dev/guides/icons/).
 
