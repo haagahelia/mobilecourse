@@ -217,7 +217,7 @@ export default function App() {
   );
 }
 ```
-We add a button to our `HomeScreen` component. When the button is pressed, the user is navigated to the setting screen. The component takes a single prop named `navigation`, which is provided by React Navigation and contains `navigate` function for navigating between screens.
+We add a button to our `HomeScreen` component. When the button is pressed, the user is navigated to the settings screen. The component receives a props that includes the `navigation` object, which contains the `navigate` function for screen navigation. You can read more about the `navigation` object at https://reactnavigation.org/docs/navigation-object.
 ```jsx
 // navigation prop is passed in to every screen component in stack navigator
 export default function HomeScreen({ navigation }) {
@@ -233,7 +233,7 @@ export default function HomeScreen({ navigation }) {
 }
 ```
 #### Passing parameters between pages
-Parameters can be passed by using the navigator's `route` propss.
+Parameters can be passed by using the navigator's props that contains `route` object. You can read more about the `route` object in https://reactnavigation.org/docs/route-object.
 
 ```jsx title="HomeScreen.js"
 return (
