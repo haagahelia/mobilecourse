@@ -248,7 +248,7 @@ return (
 ```
 Setting screen can now access the passed params.
 
-```js title="SettingScreen.js"
+```jsx title="SettingScreen.js"
 function SettingsScreen({ route }) 
   const { user } = route.params;
   
