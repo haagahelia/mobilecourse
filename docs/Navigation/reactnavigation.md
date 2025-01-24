@@ -233,7 +233,7 @@ export default function HomeScreen({ navigation }) {
 }
 ```
 #### Passing parameters between pages
-Parameters can be passed by using the navigator's props that contains `route` object. You can read more about the `route` object in https://reactnavigation.org/docs/route-object.
+Parameters can be passed by using the navigator's props that contains `route` object. You can read more about the `route` object at https://reactnavigation.org/docs/route-object.
 
 ```jsx title="HomeScreen.js"
 return (
