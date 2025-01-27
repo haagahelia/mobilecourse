@@ -6,7 +6,11 @@ Expo provides Expo Router that is routing library for React Native applications.
 
 Read more in https://docs.expo.dev/router/introduction/
 
-You can easily test expo router by creating expo app without template using the command `npx create-expo-app@latest`. It includes expo router and creates one route for you.
+You can easily test expo router by creating expo app without template using the following command:
+```bash
+npx create-expo-app@latest
+```
+This command creates an app that includes the Expo Router and some example routes.
 
 ![](img/expo_router.png)
 
