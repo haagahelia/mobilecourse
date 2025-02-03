@@ -98,7 +98,6 @@ Thus we can set the production environment variable values in the runtime enviro
 Define a file named `.env` in project root. Environment variable values can be assigned in the file:
   ```
   EXPO_PUBLIC_API_URL=https://staging.example.com
-  EXPO_PUBLIC_API_KEY=abc123
   ```
 Refer to [Expo documentation](https://docs.expo.dev/guides/environment-variables/) for details.
 
