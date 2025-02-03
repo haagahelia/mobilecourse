@@ -139,8 +139,7 @@ Finally, we use conditional rendering to display `ActivityIndicator` component w
 ```
 :::info[Task]
 Refactor the GitHub API app by splitting it into smaller, more manageable components. Specifically:
-
 - Create a separate component for the list that displays repositories.
-- Create a separate file for the REST API calls.
+- Create a separate module for the REST API calls. You can also create a custom hook that handles networking. Read more about custom hooks in https://react.dev/learn/reusing-logic-with-custom-hooks.
 - Read the next section about environment variables and configure the API URL to be read from a `.env` file.
 :::
