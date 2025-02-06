@@ -41,4 +41,6 @@ handleRead = async () => {
   } 
 }
 ```
+Read more about async storage in [the official documentation](https://react-native-async-storage.github.io/async-storage/).
+
 Expo provides also SecureStore that can be used to encrypt and securely store key–value pairs locally on the device (https://docs.expo.dev/versions/latest/sdk/securestore/).
