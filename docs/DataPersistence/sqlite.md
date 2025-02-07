@@ -9,7 +9,7 @@ Installation:
 npx expo install expo-sqlite 
 ```
 
-Example: Courselist app where user types course title and credits. The course is saved to a database when save button is pressed. All courses are shown in the flatlist component.
+Example: Course list app where user types course title and credits. The course is saved to a database when save button is pressed. All courses are displayed in the flatlist component.
 
 ![](img/courselist.png)
 
@@ -165,7 +165,6 @@ export default function App() {
   );
 }
 ```
-
 `SQLIteProvider` properties:
 - `databaseName` defines the database file name. `SQLiteProvider` takes care of opening the database. 
 - `onInit ` defines an initialization handler that is run before rendering the children of the component. We use it to create the database schema.
@@ -203,3 +202,39 @@ export default function Courselist() {
   // ...
 ```
 Because the database initialization is done in an other component, we need to launch the initial list update using the `useEffect` hook.
+
+You can also use Drizzle ORM (https://orm.drizzle.team/) or Knex.js query builder (https://knexjs.org/) with Expo SQLite.
+
+### Debugging SQLite database
+
+You can browse on-device SQLite database using Drizzle Studio (https://orm.drizzle.team/drizzle-studio/overview). 
+
+To get started, install Expo Drizzle Studio plugin:
+
+```bash
+npm install expo-drizzle-studio-plugin
+```
+Then, setup Drizzle Studio plugin:
+
+```jsx
+import { useDrizzleStudio } from "expo-drizzle-studio-plugin";
+import * as SQLite from "expo-sqlite";
+import { View } from "react-native";
+
+const db = SQLite.openDatabaseSync("db");
+
+export default function App() {
+    useDrizzleStudio(db);
+
+    return <View></View>;
+}
+```
+Run your app on physical device or emulator. Open the devtools menu from the terminal:
+```
+shift + m
+```
+Select `expo-drizzle-studio-plugin`.
+
+Drizzle Studio opens in a browser and you can browse your database. You can also add new records to your database.
+
+![](img/drizzle_studio.png)
