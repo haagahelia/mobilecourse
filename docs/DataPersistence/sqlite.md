@@ -203,7 +203,9 @@ export default function Courselist() {
 ```
 Because the database initialization is done in an other component, we need to launch the initial list update using the `useEffect` hook.
 
-You can also use Drizzle ORM (https://orm.drizzle.team/) or Knex.js query builder (https://knexjs.org/) with Expo SQLite.
+You can also use Drizzle ORM (https://orm.drizzle.team/) or Knex.js query builder (https://knexjs.org/) with Expo SQLite. Read more about 3rd party library integrations in https://docs.expo.dev/versions/latest/sdk/sqlite/#third-party-library-integrations.
+
+The database can be encrypted using SQL Chipher extension (https://www.zetetic.net/sqlcipher/).
 
 ### Debugging SQLite database
 
