@@ -53,7 +53,7 @@ const initialize = async () => {
 }
 ```
 :::note
-  Because we use the `async`-`await`syntax to handle the asynhronous calls we need to use exception handling to handle possible database errors. 
+  Because we use the `async`-`await`syntax to handle the asynhronous calls we need to use `try`-`catch` `exception handling to handle possible database errors. 
 :::
 
 The application logic would require that we retrieve the course list from the database and render it for the user at startup. The function to do that will be implemented later. 
@@ -113,17 +113,16 @@ In the `FlatList` component, we show the title and credits of the courses. For d
 <FlatList
   keyExtractor={item => item.id.toString()}
   renderItem={({ item }) =>
-    <View style={styles.itemcontainer}>
+    <View>
       <Text>{item.title}</Text>
       <Text>{item.credits} </Text>
-      <Text style={{ color: '#0000ff' }} onPress={() => deleteItem(item.id)}>done</Text>
-    </View>}
+      <Text style={{ color: '#ff0000' }} onPress={() => deleteItem(item.id)}>Done</Text>
+    </View>
+  }
   data={courses}
 />
 ```
-
 The `deleteItem` function deletes item from the course table and updates the course list after the deletion.
-
 ```js
 const deleteItem = async (id) => {
     try {
