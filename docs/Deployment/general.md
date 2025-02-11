@@ -29,15 +29,20 @@ eas build:configure       # create EAS configuration for your project
 
 ### Building for internal distribution on Android
 - For Android you can build an apk-binary that can be installed on an emulator or a device directly.
-- You may need to modify the build profile definition in `eas.json`
+- You may need to modify the build profile definition in `eas.json`. 
 ```json
 {
   "build": {
-    "preview": {
-      "android": {
-        "buildType": "apk"
-      }
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal"
     },
+    "preview": {
+      "distribution": "internal"
+    },
+    "production": {}
+  }
+}
 ```
 - Run build
 ```bash
