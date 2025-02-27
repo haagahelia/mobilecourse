@@ -49,8 +49,12 @@ const getContacts = async () => {
     const { data } = await Contacts.getContactsAsync(
       { fields: [Contacts.Fields.PhoneNumbers] }
     );
+
     if (data.length > 0) {
       setContact(data[0]);
+    }
+    else {
+      Alert.alert("Warning", "No contacts found.");      
     }
   }
 }
