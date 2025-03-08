@@ -31,7 +31,7 @@ The app looks the following:
 Create a new Expo project and install React Native Paper UI library and react-native-safe-area-context:
 
 ```bash
-npx create-expo-app gitexplorer
+npx create-expo-app gitexplorer --template blank
 cd gitexplorer
 npm install react-native-paper
 npx expo install react-native-safe-area-context
