@@ -10,6 +10,12 @@ Install React Native Paper UI library to your project by typing the following co
 ```bash
 npm install react-native-paper
 ```
+You also have to install react-native-safe-area-context to handle safe area. Safe areas are areas of the screen that are guaranteed not to be obstructed by system bars or notches on devices.
+```bash
+npx expo install react-native-safe-area-context
+```
+In the following example project, we will learn some of the components that library provides.
+
 ### Example Project
 
 We create GitExplore app for searching GitHub repositories based on user-provided keywords. It is similar app that we already delveloped in the Networking section, but now we build the user interface using React Native Paper components. The app also allows users to view repository details in a browser. 
@@ -28,6 +34,7 @@ Create a new Expo project and install React Native Paper UI library:
 npx create-expo-app gitexplorer --template blank
 cd gitexplorer
 npm install react-native-paper
+npx expo install react-native-safe-area-context
 ```
 Let's first create a new component `GitExplorer`:
 
