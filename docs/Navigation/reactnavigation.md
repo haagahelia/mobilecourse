@@ -139,7 +139,7 @@ const Tabs = createBottomTabNavigator({
   },
 });
 
-const Navigation = createStaticNavigation(RootStack);
+const Navigation = createStaticNavigation(Tabs);
 
 export default function App() {
   return <Navigation />;
