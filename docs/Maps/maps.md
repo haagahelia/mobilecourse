@@ -71,4 +71,32 @@ The `Marker` component is used to display a marker on a map. To display a marker
     />
 </MapView>
 ```
+
+#### Production build
+
+When moving from development to a production build with React Native Maps in your Expo project, you’ll need a Google Maps API key (for Android and iOS separately). Make sure you enable the right APIs in the Google Cloud Console (Maps SDK for Android & Maps SDK for iOS).
+
+Keys are defined in your `app.json` file of your Expo project:
+
+```json
+{
+  "expo": {
+    "android": {
+      "config": {
+        "googleMaps": {
+          "apiKey": "YOUR_ANDROID_API_KEY"
+        }
+      }
+    },
+    "ios": {
+      "config": {
+        "googleMapsApiKey": "YOUR_IOS_API_KEY"
+      }
+    }
+  }
+}
+```
+
+If you use Apple Maps you don’t need API keys. React Native Maps uses Apple’s native MapKit by default on iOS.
+
 Next, we learn how to get current location of your device.
