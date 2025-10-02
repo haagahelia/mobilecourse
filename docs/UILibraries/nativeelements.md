@@ -75,7 +75,7 @@ export default function App() {
 }
 ```
 #### App header
-Next, we will implement application app bar. Top app bars display navigation, actions, and text at the top of a screen. React Native Paper provides component `Appbar` that we will display in our `App` component. The `mode` prop defines the height of the Appbar (small, medium, large, center-aligned).
+Next, we will implement application app bar. Top app bars display navigation, actions, and text at the top of a screen. React Native Paper provides component `Appbar` that we will display in our `App` component. `Appbar.Header` is used to create top appbar. The `mode` prop can be used to define the height of the Appbar (small, medium, large, center-aligned).
 
 ```jsx title="App.js
 import { PaperProvider, Appbar } from 'react-native-paper';
@@ -86,9 +86,9 @@ export default function App() {
   return (
     <PaperProvider>
       // highlight-start
-      <Appbar mode="medium" elevated>
+      <Appbar.Header elevated>
         <Appbar.Content title="GitExplorer" />
-      </Appbar>
+      </Appbar.Header>
        // highlight-end
       <GitExplorer />
       <StatusBar style="auto" />
