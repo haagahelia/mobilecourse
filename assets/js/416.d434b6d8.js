@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkmobilecourse=globalThis.webpackChunkmobilecourse||[]).push([[416],{416:(e,s,b)=>{b.r(s)}}]);
