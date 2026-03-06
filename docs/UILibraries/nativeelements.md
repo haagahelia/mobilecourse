@@ -3,7 +3,7 @@ title: "React Native Paper"
 sidebar_position: 1
 ---
 
-**React Native Paper** (https://reactnativepaper.com/) is a popular open-source UI library for React Native applications. It provides a set of customizable and pre-designed components that follow Google's Material Design.
+**React Native Paper** (https://oss.callstack.com/react-native-paper/) is a popular open-source UI library for React Native applications. It provides a set of customizable and pre-designed components that follow Google's Material Design.
 
 ### Installation
 Install React Native Paper UI library to your project by typing the following command in your project's folder.
@@ -121,7 +121,7 @@ export default function GitExplorer() {
 ```
 Then, we render `TextInput` component that allows user to input keyword that is used in the fetch request. The React Native Paper `TextInput` component have similar props than React Native component (such as value, onChange etc.). React Native Paper `TextInput` provides additional props for Material Design-specific features such as `label`. The `label` prop is used to provide a floating label for the input field.  
 
-The React Native `Button` component renders a basic button with platform-specific styling. It has a simple appearance and is not highly customizable in terms of design. React Native Paper's `Button` component, on the other hand, follows Material Design guidelines and offers more styling options out of the box. In our app we are using contained button and that can be defined using the `mode` props. We also display web search icon in our button using the `icon` props. See the list of supported icons in https://callstack.github.io/react-native-paper/docs/guides/icons.
+The React Native `Button` component renders a basic button with platform-specific styling. It has a simple appearance and is not highly customizable in terms of design. React Native Paper's `Button` component, on the other hand, follows Material Design guidelines and offers more styling options out of the box. In our app we are using contained button and that can be defined using the `mode` props. We also display web search icon in our button using the `icon` props. See the list of supported icons in https://oss.callstack.com/react-native-paper/docs/guides/icons.
 
 ```jsx title="GitExplorer.js"
 import { useState } from 'react';
@@ -193,7 +193,7 @@ The `handleFetch` function is executed when the button is pressed.
 ```
 
 #### Flatlist & Card
-Then we display repositories using the React Native `FlatList` component. Now, each row is displayed using React Native Paper `Card` component (https://callstack.github.io/react-native-paper/docs/components/Card/). To show text we use React Native Paper `Text` component that provides pre-defined text styles. You can see all styles in https://callstack.github.io/react-native-paper/docs/components/Text/.
+Then we display repositories using the React Native `FlatList` component. Now, each row is displayed using React Native Paper `Card` component (https://oss.callstack.com/react-native-paper/docs/components/Card/). To show text we use React Native Paper `Text` component that provides pre-defined text styles. You can see all styles in https://oss.callstack.com/react-native-paper/docs/components/Text/.
 
 First, Import required component:
 
@@ -235,6 +235,8 @@ Then render `FlatList` component:
   );
 ```
 Now, You should see the repositories in the list when you type a keyword and press 'Search'-button.
+
+You can use React Native Paper `List` components also to display list tiles. You can read more about `List` components in https://oss.callstack.com/react-native-paper/docs/components.
 
 #### Web Browser
 Next, we implement the feature that user can browse the github site from the list. We use `Card.Action` component to show a button inside the `Card` component. We use `IconButton` component which displays only an icon without a label. When the button is pressed, we call `handleBrowse` function and pass repository url as an argument.
