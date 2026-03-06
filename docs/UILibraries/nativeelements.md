@@ -236,7 +236,7 @@ Then render `FlatList` component:
 ```
 Now, You should see the repositories in the list when you type a keyword and press 'Search'-button.
 
-You can use React Native Paper `List` components also to display list tiles. You can read more about `List` components in https://oss.callstack.com/react-native-paper/docs/components.
+You can use React Native Paper `List` components also to display list tiles. You can read more about `List` components in https://oss.callstack.com/react-native-paper/docs/components/List/ListItem.
 
 #### Web Browser
 Next, we implement the feature that user can browse the github site from the list. We use `Card.Action` component to show a button inside the `Card` component. We use `IconButton` component which displays only an icon without a label. When the button is pressed, we call `handleBrowse` function and pass repository url as an argument.
