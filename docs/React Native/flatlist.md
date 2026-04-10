@@ -29,7 +29,6 @@ type TodoItem = {
 }
 ```
 Declare new states to manage text input value and FlatList items:
-
 ```ts
 // import useState
 import { useState } from 'react';
@@ -38,7 +37,7 @@ import { useState } from 'react';
 const [todo, setTodo] = useState<TodoItem>({ title: "" , description: "" });
 const [todos, setTodos] = useState<TodoItem[]>([]);
 ```
-- Next, we render the `TextInput` and `Button` components:
+Next, we render the `TextInput` and `Button` components:
 ```tsx
 return (  
   <View style={styles.container}>
@@ -63,7 +62,7 @@ const handlePress = () => {
   setTodo({ title: "", description: "" });
 };
 ```
-- Finally, we render the `FlatList` component to display all todos.
+Render the `FlatList` component to display all todos.
 ```tsx
 <FlatList 
   data={todos} 
@@ -75,7 +74,7 @@ const handlePress = () => {
   } 
 />
 ```
-The `renderItem` prop defines how data items are rendered within the list. The `data` prop indicates the source of the data, which must be an array. The `keyExtractor` prop extracts a unique key for each item in the list. It that is not defined, index will be used.
+The `renderItem` prop defines how data items are rendered within the list. The `data` prop indicates the source of the data, which must be an array. The `keyExtractor` prop extracts a unique key for each item in the list. It that is not defined, index will be used. The `renderItem` must return a single root element. To return multiple elements, wrap them in a container.
 
 Next, we will add styling to the todo items in the list. We will display the title in a bigger font and bold. For that, we will create a new style:
 
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
   // highlight-end
 });
 ```
-Then, we can use `titleText` style in the flatlist:
+Then, we can use `titleText` style in the list item:
 ```ts
 <FlatList
   style={{ marginTop: 10 }}
