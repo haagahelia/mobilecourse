@@ -24,7 +24,7 @@ In the next example, we implement a bottom tab navigator that provides navigatio
 
 First, create a new React Native app and install React Navigation. Create two components that are used in the navigator:
 
-```jsx title="HomeScreen.js"
+```jsx title="HomeScreen.tsx"
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function HomeScreen() {
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
 });
 ```
-```jsx title="SettingScreen.js"
+```jsx title="SettingScreen.tsx"
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function SettingScreen() {
@@ -72,7 +72,7 @@ npm install @react-navigation/bottom-tabs
 ```
 Import the `NavigationContainer` and `createBottomTabNavigator`. The `NavigatorContainer` serves as the root component for the navigation and it must be rendered at the top level of your React Native application.
 
-```jsx title="App.js"
+```jsx title="App.tsx"
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
@@ -102,7 +102,7 @@ export default function App() {
 ```
 Finally, we can set-up the navigator. The `Screen` component's `name` prop defines the name that is used for screen. The name is also used to navigate to the screen. The `component` prop defines the React component to render for the screnn.
 
-```jsx title="App.js"
+```jsx title="App.tsx"
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './HomeScreen'
@@ -128,7 +128,7 @@ Now, we should see the bottom tab naviagtor in our app and we are able to naviga
 :::note
 React Navigation offers two methods for implementing routing: **static** and **dynamic**.  In this material we use the dynamic (component) method where routing is defined using components. In the static method, routing is defined  using objects. For example, the previous example look like this when using static navigation:
 
-```jsx
+```tsx
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStaticNavigation } from '@react-navigation/native';
 
@@ -155,11 +155,11 @@ To use icons, you have to import `Ionicons` component:
 import Ionicons from '@expo/vector-icons/Ionicons';
 ```
 Then, you can render an icon. The `name` props defines what icon to display. You can explore different icons in: https://icons.expo.fyi/
-```jsx
+```tsx
   <Ionicons name="home" size={32} color="red" />
 ```
 Next, we'll add icons to our tab navigation bar by utilizing the `screenOptions` property of the `Navigator` component.
-```jsx
+```tsx
 <NavigationContainer>
   <Tab.Navigator
     screenOptions={({ route }) => ({  // Navigator can be customized using screenOptions
@@ -249,7 +249,7 @@ return (
 Setting screen can now access the passed params.
 
 ```jsx title="SettingScreen.js"
-function SettingsScreen({ route }) 
+export default function SettingsScreen({ route }) {
   const { user } = route.params;
   
   return(
