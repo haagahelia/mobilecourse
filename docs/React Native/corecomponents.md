@@ -12,7 +12,7 @@ Some of the most common core components are:
 ### View 
 `View` is a container component that supports flexbox layout. It is used to group and structure other components within your application. 
 
-```jsx
+```tsx
 import { View } from "react-native";
 
 return (
@@ -36,11 +36,11 @@ React Native provides also `<ScrollView>` component that is generic scrolling co
 #### Using the `Text` component:
 Import the `Text` component from React Native.
 
-```js
+```ts
 import { Text, View } from "react-native";
 ```
 Render the `Text` component.
-```jsx
+```tsx
 return (
   <View style={styles.container}>
     <Text>This is text</Text>
@@ -49,7 +49,7 @@ return (
 ```
 You can use `Text` component's `style` prop to define font size, font weight etc. For example,
 
-```jsx
+```tsx
 return (
   <View style={styles.container}>
     <Text style={{ fontSize: 18, fontWeight: 'bold'}}>This is text</Text>
@@ -64,12 +64,12 @@ For more information and examples, refer to the official documentation https://r
 
 #### Using the `Button` component:
 Import the `Button` component from React Native.
-```js
+```ts
 import { Button, View } from "react-native";
 ```
 Render the `Button` component.  The `onPress` prop specifies the function that will be called when the button is pressed. The `title` prop sets the text displayed on the button. 
 
-```jsx
+```tsx
 return (
   <View>
     <Button onPress={buttonPressed} title="Press me" />
@@ -77,7 +77,7 @@ return (
 );
 ```
 Pressing the button will show an alert. Note: You have to import also `Alert` component. Read more about `Alert` in https://reactnative.dev/docs/alert. 
-```js
+```ts
 const buttonPressed = () => {
   Alert.alert("Button pressed");
 };
@@ -90,7 +90,7 @@ const buttonPressed = () => {
 `Button` component support limited level of customization. You can use the `Pressable` component to build your own button.
 
 For example, to get rounded red button:
-```jsx
+```tsx
 import { Pressable, Text, StyleSheet } from 'react-native';
 
 const RoundedRedButton = () => {
@@ -132,15 +132,15 @@ For more information and examples, refer to the official documentation https://r
 #### Using the `TextInput` component:
 Import the `TextInput` component from React Native.
 
-```js
+```ts
 import { View, Button, Alert, TextInput } from "react-native";
 ```
 Create a new state where typed input is saved.
-```js
+```ts
 const [text, setText] = useState("");
 ```
 Render the `TextInput` component.
-```jsx
+```tsx
 <TextInput
   placeholder='Enter some text'
   onChangeText={text => setText(text)} 
@@ -155,13 +155,13 @@ The `value` prop sets the value of the input field. In controlled components, th
 
 Then, we define `handlePress` function that shows `text` state value using the `Alert` component.
 
-```js
+```ts
 const handlePress = () => {
   Alert.alert("You typed:" + text);
 };
 ```
 Finally, import and render the `Button` component.
-```jsx
+```tsx
 <Button onPress={handlePress} title="Press me" />
 ```
 After entering text into the input field, pressing the button should trigger an alert displaying the text you've typed.
@@ -201,5 +201,30 @@ source={{uri: 'IMAGE_URI'}}
 React Native provides `SafeAreaView` component  but that support only iOS devices.
 
 You can use the `react-native-safe-area-context` library (https://docs.expo.dev/versions/latest/sdk/safe-area-context/), which supports both iOS and Android devices. This library provides a `SafeAreaView` component that works across platforms.
+
+Installation:
+
+```bash
+npx expo install react-native-safe-area-context
+```
+Usage:
+```tsx
+import {
+  SafeAreaView,
+  SafeAreaProvider,
+} from 'react-native-safe-area-context';
+
+function MyComponent() {
+  return (
+    <SafeAreaProvider>
+      <SafeAreaView>
+        <Button title="Press Me" onPress={doSomething()} />
+      </SafeAreaView>
+    </SafeAreaProvider>
+  );
+}
+```
+
+`SafeAreaView` component is regular `View` component that use padding to set safe area.
 
 For additional core components, refer to the following link https://reactnative.dev/docs/components-and-apis
