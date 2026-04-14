@@ -189,16 +189,16 @@ In the following example, we'll demonstrate navigating between two screens using
 ![](img/stack_navigator.png)
 
 To use stack navigation, we have to Install `@react-navigation/native-stack` library:
-```
+```bash
 npm install @react-navigation/native-stack
 ```
 Import `NavigationContainer` and `createStackNavigator` to the App.js file
-```js	title="App.js"
+```js	title="App.tsx"
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 ```
 We call the `createNativeStackNavigator` function and render the navigator and screens. Now, the App.js source code looks like the following:
-```jsx title="App.js"
+```tsx title="App.tsx"
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './HomeScreen'
@@ -218,7 +218,7 @@ export default function App() {
 }
 ```
 We add a button to our `HomeScreen` component. When the button is pressed, the user is navigated to the settings screen. The component receives a props that includes the `navigation` object, which contains the `navigate` function for screen navigation. You can read more about the `navigation` object at https://reactnavigation.org/docs/navigation-object.
-```jsx
+```tsx
 // navigation prop is passed in to every screen component in stack navigator
 export default function HomeScreen({ navigation }) {
   return (
@@ -235,26 +235,80 @@ export default function HomeScreen({ navigation }) {
 #### Passing parameters between pages
 Parameters can be passed by using the navigator's props that contains `route` object. You can read more about the `route` object at https://reactnavigation.org/docs/route-object.
 
-```jsx title="HomeScreen.js"
-return (
-  <View style={styles.container}>
-    <Text>Home screen</Text>
-    <Button 
-      onPress={() => navigation.navigate('Settings', {user: 'Mike'})}
-      title="Settings" />
-  </View>
-);
+We can add type-check to screen names and params when using React Navigation. You can read about type-checking in https://reactnavigation.org/docs/typescript.
 
+Let's create `types.ts` file in the `/src` directory. We declare type that maps each screen name to the parameters it accepts:
+
+```ts title="types.ts"
+export type RootStackParamList = {
+  Home: undefined;
+  Settings: { userId: string };
+};
+```
+This gives TypeScript a picture of your navigation structure, so it can catch errors in the development phase. For example, navigating to missing screen or passing the wrong params.
+
+`NativeStackScreenProps` is a built-in React Navigation type that automatically gives your screen component two typed props: `navigation` and `route`.
+
+```ts title="types.ts"
+export type RootStackParamList = {
+  Home: undefined;
+  Settings: { userId: string };
+};
+
+export type RootStackScreenProps<T extends keyof RootStackParamList> =
+  NativeStackScreenProps<RootStackParamList, T>;
+```
+`T` is a generic type parameter constrained to be one of the screen name keys.  So only 'Home' or 'Settings' are valid values (based on our `RootStackParamList`). Passing any other string is a compile time error.
+
+Then, we pass `RootStackParamList` as a generic type argument to `createNativeStackNavigator`.
+
+```tsx title="App.tsx"
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './HomeScreen'
+import SettingScreen from './SettingScreen'
+import type { RootStackParamList } from '.\types.ts'
+  
+const Stack = createNativeStackNavigator<RootStackParamList>();
+  
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Settings" component={SettingScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+```
+
+CONTINUES...
+```tsx title="HomeScreen.tsx"
+import { StyleSheet, Text, View, Button } from 'react-native';
+import type { RootStackScreenProps } from './types.ts';
+
+export default function HomeScreen({ navigation }: RootStackScreenProps<'Home'>) {
+  return (
+    <View style={styles.container}>
+      <Text>Home screen</Text>
+      <Button
+        title="Settings"
+        onPress={() => navigation.navigate('Settings', { userId: "john" })} // Navigate to the Settings screen
+      />
+    </View>
+  );
+}
 ```
 Setting screen can now access the passed params.
 
-```jsx title="SettingScreen.js"
+```tsx title="SettingScreen.tsx"
 export default function SettingsScreen({ route }) {
-  const { user } = route.params;
+  const { userId } = route.params;
   
   return(
     <View style={styles.container}>
-      <Text>Welcome to settings {user}</Text>
+      <Text>Welcome to settings {userId}</Text>
     </View>
   );
 }
