@@ -267,7 +267,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './HomeScreen'
 import SettingScreen from './SettingScreen'
-import type { RootStackParamList } from '.\types.ts'
+import type { RootStackParamList } from '.\types'
   
 const Stack = createNativeStackNavigator<RootStackParamList>();
   
@@ -282,11 +282,10 @@ export default function App() {
   );
 }
 ```
-
-CONTINUES...
+In `HomeScreen`, we define what type the `navigation` prop should be by using `RootStackScreenProps`. The `<'Home'>` part is a generic type argument and it narrows the type to just the home screen. Then TypeScript can catch mistakes like navigating to a screen that doesn't exist.
 ```tsx title="HomeScreen.tsx"
 import { StyleSheet, Text, View, Button } from 'react-native';
-import type { RootStackScreenProps } from './types.ts';
+import type { RootStackScreenProps } from './types';
 
 export default function HomeScreen({ navigation }: RootStackScreenProps<'Home'>) {
   return (
@@ -294,16 +293,18 @@ export default function HomeScreen({ navigation }: RootStackScreenProps<'Home'>)
       <Text>Home screen</Text>
       <Button
         title="Settings"
-        onPress={() => navigation.navigate('Settings', { userId: "john" })} // Navigate to the Settings screen
+        onPress={() => navigation.navigate('Settings', { userId: "johndoe" })} // Navigate to the Settings screen
       />
     </View>
   );
 }
 ```
-Setting screen can now access the passed params.
-
+In `SettingScreen`, we define what type the `route` prop should be by using `RootStackScreenProps`. Then TypeScript knows exactly what parameters the Settings screen expects (in this case, `{ userId: string }`). 
 ```tsx title="SettingScreen.tsx"
-export default function SettingsScreen({ route }) {
+import { StyleSheet, Text, View } from 'react-native';
+import type { RootStackScreenProps } from './types';
+
+export default function SettingsScreen({ route }: RootStackScreenProps<'Settings'>) {
   const { userId } = route.params;
   
   return(
