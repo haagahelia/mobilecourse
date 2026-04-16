@@ -6,23 +6,31 @@ In the following example, we utilize the GitHub API to search for repositories b
 
 ![](img/github2.png)
 
-We need states to store data that we get from the response and for keyword that we use in the query parameter.
-```js
-// Import useState hook function
-import { useState } from 'react';
-
-// declare states
-const [keyword, setKeyword] = useState('');
-const [repositories, setRepositories] = useState([]);
-```
-The following URL is used to get repositories by keyword. Response contains an `item` node that is an array of repository objects. We will display both the full name and description of each repository.
+The following URL is used to get repositories by keyword. Response contains an `item` node that is an array of repository objects. We will display both the `full_name` and `description` of each repository.
 
 https://api.github.com/search/repositories?q={keyword}
 
 ![](img/github1.png)
 
+First, we define a `Repository` type that describes the shape of a single repository object. We only include the fields we actually use from the API response.
+```ts
+type Repository = {
+  id: number;
+  full_name: string;
+  description: string | null;
+};
+```
+We need states to store data that we get from the response and for keyword that we use in the query parameter.
+```ts
+// Import useState hook function
+import { useState } from 'react';
+
+// declare states
+const [keyword, setKeyword] = useState('');
+const [repositories, setRepositories] = useState<Repository[]>([]);
+```
 The `return` statement includes `TextInput` and `Button` components. The `TextInput` component allows users to input a keyword and we store it in the `keyword` state. The Button component triggers the execution of a fetch request when pressed.
-```jsx
+```tsx
 return (
   <View style={styles.container}>
     <TextInput 
@@ -36,7 +44,7 @@ return (
 );
 ```
 The `handleFetch` function executes the request and gets a query parameter from the `keyword` state. Result array is saved to the `repositories` state from the response.
-```js
+```ts
 const handleFetch = () => {
   fetch(`https://api.github.com/search/repositories?q=${keyword}`)
   .then(response => {
@@ -49,8 +57,8 @@ const handleFetch = () => {
   .catch(err => console.error(err));    
 }
 ```
-Next, we add `FlatList` component to show response data in the `return` statement. We display both the full name and description of the repositories.
-```jsx
+Next, we add `FlatList` component to show response data in the `return` statement. We display both the `full_name` and `description` of the repositories.
+```tsx
 return (
   <View style={styles.container}>
     <TextInput 
@@ -63,7 +71,6 @@ return (
     // highlight-start
     <FlatList
       data={repositories} 
-      keyExtractor={(item) => item.id}
       renderItem={({item}) =>
         <View>
           <Text style={{fontSize: 18, fontWeight: "bold"}}>
@@ -78,23 +85,31 @@ return (
   </View>
 );
 ```
+Because `data={repositories}` is typed as `Repository[]`, TypeScript automatically figures out that each item inside renderItem must be a `Repository`. Then, you get autocomplete and error checking.
+
 The `ActivityIndicator` component in React Native is a visual indicator that represents the progress of an operation (https://reactnative.dev/docs/activityindicator). Next, we utilize that to show progress of fetch operation. First, we import the `ActivityIndicator` component from React Native.
 
 We add a new state variable called `loading` to track whether the fetch operation is in progress.
-```js
+```ts
 import { useState } from 'react';
 import { StyleSheet, Text, View, Button, TextInput, 
           FlatList, StatusBar, ActivityIndicator } from 'react-native';
 
 export default function App() {
+  type Repository = {
+    id: number;
+    full_name: string;
+    description: string | null;
+  };
+
   const [keyword, setKeyword] = useState('');
-  const [repositories, setRepositories] = useState([]);
+  const [repositories, setRepositories] = useState<Repository[]>([]);
   // highlight-next-line
   const [loading, setLoading] = useState(false);
  // continue...
 ```
 In the `handleFetch` function, we set `loading` state to `true` before sending the request and set it back to `false` after the request completes or encounters an error.
-```js
+```ts
 const handleFetch = () => {
   // highlight-next-line
   setLoading(true); // Set loading state to true before fetch
@@ -113,7 +128,7 @@ const handleFetch = () => {
 }
 ```
 Finally, we use conditional rendering to display `ActivityIndicator` component when the `loading` state is `true`.
-```jsx
+```tsx
  return (
     <View style={styles.container}>
       <StatusBar hidden={true} />
@@ -124,16 +139,19 @@ Finally, we use conditional rendering to display `ActivityIndicator` component w
       {/* Display ActivityIndicator when loading is true */}
       {loading && <ActivityIndicator size="large" />}
       
-      <FlatList 
-        style={{margin: "3%"}}
-        keyExtractor={item => item.id} 
-        renderItem={({item}) => 
+      <FlatList
+        data={repositories} 
+        renderItem={({item}) =>
           <View>
-            <Text style={{fontSize: 18, fontWeight: "bold"}}>{item.full_name}</Text>
-            <Text style={{fontSize: 16 }}>{item.description}</Text>
-          </View>}
-        data={repositories} /> 
-    </View>
+            <Text style={{fontSize: 18, fontWeight: "bold"}}>
+              {item.full_name}
+            </Text>
+            <Text style={{fontSize: 16 }}>
+              {item.description}
+            </Text>
+          </View>}
+      /> 
+      </View>
   );
 }
 ```
