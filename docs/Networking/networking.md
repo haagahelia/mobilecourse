@@ -35,7 +35,7 @@ return (
   <View style={styles.container}>
     <TextInput 
       style={{fontSize: 18, width: 200}} 
-      placeholder='keyword' 
+      placeholder='Enter a keyword' 
       value={keyword}
       onChangeText={text => setKeyword(text)} 
     />
@@ -63,7 +63,7 @@ return (
   <View style={styles.container}>
     <TextInput 
       style={{fontSize: 18, width: 200}} 
-      placeholder='keyword' 
+      placeholder='Enter a keyword' 
       value={keyword}
       onChangeText={text => setKeyword(text)} 
     />
@@ -127,31 +127,36 @@ const handleFetch = () => {
   .finally(() => setLoading(false)); // Set loading state to false   
 }
 ```
-Finally, we use conditional rendering to display `ActivityIndicator` component when the `loading` state is `true`.
+Finally, we use conditional rendering to display `ActivityIndicator` component when the `loading` state is `true`. To prevent the button and text input from shifting to the center, remove the `justifyContent` setting from the `container` style. You can also wrap the `ActivityIndicator` in a separate `View` with custom centering styles.
 ```tsx
  return (
     <View style={styles.container}>
-      <StatusBar hidden={true} />
-      <TextInput style={{fontSize: 18, width: 200}} placeholder='keyword' 
-        onChangeText={text => setKeyword(text)} />
+      <TextInput 
+        style={{fontSize: 18, width: 200}} 
+        placeholder='Enter a keyword' 
+        value={keyword}
+        onChangeText={text => setKeyword(text)} 
+      />
       <Button title="Find" onPress={handleFetch} />
-      
-      {/* Display ActivityIndicator when loading is true */}
-      {loading && <ActivityIndicator size="large" />}
-      
-      <FlatList
-        data={repositories} 
-        renderItem={({item}) =>
-          <View>
-            <Text style={{fontSize: 18, fontWeight: "bold"}}>
-              {item.full_name}
-            </Text>
-            <Text style={{fontSize: 16 }}>
-              {item.description}
-            </Text>
-          </View>}
-      /> 
-      </View>
+      { 
+        loading ? 
+          <ActivityIndicator size="large" />
+        :
+          <FlatList
+            style={{ margin: 20 }}
+            data={repositories} 
+            renderItem={({item}) =>
+              <View style={{ marginBottom: 5 }}>
+                <Text style={{fontSize: 18, fontWeight: "bold"}}>
+                  {item.full_name}
+                </Text>
+                <Text style={{fontSize: 16 }}>
+                  {item.description}
+                </Text>
+            </View>}
+          />  
+      }
+    </View>
   );
 }
 ```
