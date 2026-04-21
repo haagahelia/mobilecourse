@@ -157,8 +157,7 @@ If there are sevaral components in the application, `SQLiteProvider` component c
 Let us refactor the application into two components: `App` provides the database context to all component within the app and `Courselist` renders the course list application.
 
 ```js title="App.tsx"
-import { SQLiteProvider } from 'expo-sqlite';
-import type { SQLiteDatabase } from 'expo-sqlite';
+import { SQLiteProvider, SQLiteDatabase } from 'expo-sqlite';
 import Courselist from './Courselist';
 
 export default function App() {

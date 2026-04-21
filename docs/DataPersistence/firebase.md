@@ -44,7 +44,7 @@ In the Security Rules, you can select **Start in test mode**. You can change sec
 
 Now, you can get the initialization code in the App registration phase. Copy the initialization code, we will need that later:
 
-```js
+```ts
 // Import the functions you need from the SDKs you need
 import { initializeApp } from 'firebase/app';
 
@@ -66,11 +66,11 @@ Now, we are ready to start app development.
 
 #### Initialize Firebase
 
-Let's create a new file named **firebaseConfig.js** in our Expo project. Copy the initialization code from the previous step. If you haven't copied the code, you can get the initialization code from the Firebase: Project Overview -> Project Settings
+Let's create a new file named **firebaseConfig.ts** in our Expo project. Copy the initialization code from the previous step. If you haven't copied the code, you can get the initialization code from the Firebase: Project Overview -> Project Settings
 
 Copy the code to the `firebaseConfig.js` file and export the `app`:
 
-```js title="firebaseConfig.js
+```js title="firebaseConfig.ts
 import { initializeApp } from "firebase/app";
 
 const firebaseConfig = {
@@ -90,17 +90,25 @@ export const app = initializeApp(firebaseConfig);
 The `firebaseConfig` object contains the configuration settings required to initialize Firebase within the app. The `initializeApp` function is called with the `firebaseConfig` object as its parameter. This initializes Firebase within the application using the provided configuration. Finally, the initialized Firebase `app` instance is exported using `export const app`. This allows other parts of the application to import and use the initialized Firebase app for accessing Firebase services
 
 #### Shopping App
-Now, we are ready to start develope the shopping list app. We create two states for product and list items that we can show all shopping items in the `FlatList` component. Open the `App.js` file and create the following states:
-```js title="App.js"
-const [product, setProduct] = useState({
+Now, we are ready to start develope the shopping list app. We create two states for product and list items that we can show all shopping items in the `FlatList` component. Open the `App.tsx` file and define the following type for our products:
+
+```js title="App.tsx"
+type Product = {
+  title: string;
+  amount: string;
+}
+```
+Next, create the following states
+```js title="App.tsx"
+const [product, setProduct] = useState<Product>({
   title: '',
   amount: ''
 });
-const [items, setItems] = useState([]);
+const [items, setItems] = useState<Product[]>([]);
 ```
 Next, we add two `TextInput` components that are used to store entered values in the `product` state's `title` and `amount` properties. We also add the `Button` component that execute `handleSave` function when the button is pressed.
 
-```jsx title="App.js"
+```tsx title="App.tsx"
 const handleSave = () => {
 }
 
@@ -119,28 +127,28 @@ return (
 );
 ```
 Next, we implement the save functionality. Import the `app` instance from the `firebaseConfig`.
-```js title="App.js"
+```ts title="App.tsx"
 import { app } from './firebaseConfig';
 ```
 To use realtime database, we have to intialize realtime database and get a reference to service using the `getDatabase` method. Add the following import and call the `getDatabase` method:
-```js title ="App.js"
+```js title ="App.tsx"
 import { getDatabase } from "firebase/database";
 
 const database = getDatabase(app);
 ```
-No, we are ready to use realtime database. The Database reference is needed to perform database operations. The `ref` method creates a reference to a location in the Firebase realtime database. Data can be saved using the `push` method. We have to add the following imports in our `App` component. 
-```js title ="App.js"
+Now, we are ready to use realtime database. The Database reference is needed to perform database operations. The `ref` method creates a reference to a location in the Firebase realtime database. Data can be saved using the `push` method. We have to add the following imports in our `App` component. 
+```ts title ="App.tsx"
 import { getDatabase, ref, push } from "firebase/database";
 ```
  Then we call the `push` method in our `handleSave` function. The first argument is a reference to location where data is saved. The second argument is data that is saved (`product` object). The `push` method automatically generates unique id for items in the Firebase realtime database.
 
-```js
+```ts
 const handleSave = () => {
   push(ref(database, 'items/'), product); 
 }
 ```
 Let's also add check that empty products are not saved:
-```js
+```ts
 const handleSave = () => {
   if (product.amount && product.title) {
     push(ref(database, 'items/'), product);
@@ -157,7 +165,7 @@ Now, if you save products, you should see these in your Firebase Realtime Databa
 Data can be read by using `onValue` that listens for data changes in the Firebase realtime database. In our case, it listens for changes to the data at the specified reference (`itemsRef`). Whenever the data changes, the callback function provided (`(snapshot) => { ... }`) will be executed. 
 
 Inside the callback function, `snapshot.val()` retrieves the current value of the data at the specified reference. This data is a JavaScript object where the keys are the unique IDs of the items and the values are the shopping item objects. Then, we convert values of the fetched data into an array using `Object.values(data)` and store that to the `items` state.
-```js title="App.js"
+```ts title="App.tsx"
 // Import onValue & useEffect
 import { useState, useEffect } from 'react';
 import { getDatabase, push, ref, onValue } from 'firebase/database';
@@ -165,24 +173,27 @@ import { getDatabase, push, ref, onValue } from 'firebase/database';
 // Execute onValue inside the useEffect
 useEffect(() => {
   const itemsRef = ref(database, 'items/');
-  onValue(itemsRef, (snapshot) => {
+  return onValue(itemsRef, (snapshot) => {
     const data = snapshot.val();
     if (data) {
-      setItems(Object.values(data));
+      setItems(Object.values(data) as Product[]);
     } else {
-      setItems([]); // Handle the case when there are no items
+      setItems([]);
     }
-  })
+  });
 }, []);
 ```
+`onValue` returns an `unsubscribe` function that should be called when the component unmounts, otherwise the listener keeps running and can cause memory leaks or state updates on unmounted components. The useEffect should return it as a cleanup
+
 Finally, we add `FlatList` component and display products that are saved to the `items` state.
-```jsx title="App.js"
+```tsx title="App.tsx"
 <FlatList 
   renderItem={({item}) => 
-    <View style={styles.listcontainer}>
+    <View>
       <Text style={{fontSize: 18}}>{item.title}, {item.amount}</Text>
     </View>} 
-  data={items} />      
+  data={items} 
+/>      
 ```
 
 ### Read More
