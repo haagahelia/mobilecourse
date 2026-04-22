@@ -14,23 +14,26 @@ In this example, users can take a photo which is then displayed in the app. The 
 ![](img/camera.png)
 
 Import `Camera` and `useCameraPermissions` from `expo-camera` to your component. The `useCameraPermissions` is hook function to check or request permissions to access the camera.
-```js
+```ts
 import { CameraView, useCameraPermissions } from 'expo-camera';
 ```
-We use states to store photo data. We also have to create a `ref` to camera component using `useRef` hook. By using `ref` we can get access to camera component's methods.
+We use states to store photo data. `photoURI` state stores the local URI (file path) of the captured photo. `photoBase64` state stores the photo as a Base64 encoded string, which is a text representation of the raw image bytes.
+
+We also have to create a `ref` to camera component using `useRef` hook. By using `ref` we can get access to camera component's methods.
 
 We use the `useCameraPermissions` hook to check the camera access permission. If the permission has been granted by the user, the permission value will be set to `granted`. To request permission from the user, we can call the `requestPermission` function.
 
-```js
+```ts
 const [photoName, setPhotoName] = useState('');
-const [photoBase64, setPhotoBase64] = useState('');
+// photo.base64 can be string or undefined
+const [photoBase64, setPhotoBase64] = useState<string | undefined>('');
 const [permission, requestPermission] = useCameraPermissions();
 
-const camera = useRef(null);
+const camera = useRef<CameraView>(null);
 ```
 In the `return` statement, we use conditional rendering. If the app has no permission to use camera, we show a button to prompt the user for permission. Otherwise camera, photo previews and button are rendered.
 
-```jsx
+```tsx
 if (!permission) {
   // Camera permissions are still loading.
   return <View />;
@@ -63,14 +66,14 @@ return (
 );
 ```
 The `Button` component invokes a function called `snap` that takes a photo.
-```js
+```ts
 <Button title="Take Photo" onPress={snap} />
 ```
 Below is the source code of the `snap` function. Camera’s `takePictureAsync` method returns an object with properties: `uri`, `base64`, `width`, `height` and `exif`. The `base64` is string that contains JPEG data of the image (base64 encoded).
 
-```js
+```ts
 const snap = async () => {
-  if (camera) {
+  if (camera.current) {
     const photo = await camera.current.takePictureAsync({base64: true});
     setPhotoName(photo.uri);
     setPhotoBase64(photo.base64); 
