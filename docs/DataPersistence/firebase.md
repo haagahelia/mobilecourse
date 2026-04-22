@@ -172,8 +172,7 @@ import { getDatabase, push, ref, onValue } from 'firebase/database';
 
 // Execute onValue inside the useEffect
 useEffect(() => {
-  const itemsRef = ref(database, 'items/');
-  return onValue(itemsRef, (snapshot) => {
+  return onValue(ref(database, 'items/'), (snapshot) => {
     const data = snapshot.val();
     if (data) {
       setItems(Object.values(data) as Product[]);
@@ -195,7 +194,6 @@ Finally, we add `FlatList` component and display products that are saved to the 
   data={items} 
 />      
 ```
-
 ### Read More
 - Firebase Realtime Database documentation: https://firebase.google.com/docs/database
 - Firebase Authentication: https://firebase.google.com/docs/auth
