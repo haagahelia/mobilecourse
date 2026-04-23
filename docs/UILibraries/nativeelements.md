@@ -31,14 +31,14 @@ The app looks the following:
 Create a new Expo project and install React Native Paper UI library:
 
 ```bash
-npx create-expo-app gitexplorer --template blank
+npx create-expo-app@latest --template blank-typescript
 cd gitexplorer
 npm install react-native-paper
 npx expo install react-native-safe-area-context
 ```
 Let's first create a new component `GitExplorer`:
 
-```jsx title="GitExplorer.js"
+```tsx title="GitExplorer.tsx"
 import { StyleSheet, View } from 'react-native';
 
 export default function GitExplorer() {
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
 ```
 In the `App` component, we provide theme by using the `PaperProvider` component. The `PaperProvider` component ensures that all components have access to the necessary theme and configuration options. We also import `GitExplorer` component and render it in the `App` component. 
 
-```jsx title="App.js"
+```tsx title="App.tsx"
 import { PaperProvider } from 'react-native-paper';
 import { StatusBar } from 'expo-status-bar';
 import GitExplorer from './GitExplorer'
@@ -77,7 +77,7 @@ export default function App() {
 #### App header
 Next, we will implement application app bar. Top app bars display navigation, actions, and text at the top of a screen. React Native Paper provides component `Appbar` that we will display in our `App` component. `Appbar.Header` is used to create top appbar. The `mode` prop can be used to define the height of the Appbar (small, medium, large, center-aligned).
 
-```jsx title="App.js
+```tsx title="App.tsx"
 import { PaperProvider, Appbar } from 'react-native-paper';
 import { StatusBar } from 'expo-status-bar';
 import GitExplorer from './GitExplorer'
@@ -101,15 +101,21 @@ Now, you should see the app bar at the top of you app.
 #### Button & TextInput
 In the `GitExplorer` component, we need two states to store keyword and repositories.
 
-```jsx title="GitExplorer.js"
+```tsx title="GitExplorer.tsx"
 // highlight-next-line
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 
+type Repository = {
+  id: number;
+  full_name: string;
+  description: string | null;
+};
+
 export default function GitExplorer() {
   // highlight-start
   const [keyword, setKeyword] = useState('');
-  const [repositories, setRepositories] = useState([]);
+  const [repositories, setRepositories] = useState<Repository[]>([]);
   // highlight-end
 
   return (
@@ -117,21 +123,26 @@ export default function GitExplorer() {
     </View>
   );
 }
-
 ```
 Then, we render `TextInput` component that allows user to input keyword that is used in the fetch request. The React Native Paper `TextInput` component have similar props than React Native component (such as value, onChange etc.). React Native Paper `TextInput` provides additional props for Material Design-specific features such as `label`. The `label` prop is used to provide a floating label for the input field.  
 
 The React Native `Button` component renders a basic button with platform-specific styling. It has a simple appearance and is not highly customizable in terms of design. React Native Paper's `Button` component, on the other hand, follows Material Design guidelines and offers more styling options out of the box. In our app we are using contained button and that can be defined using the `mode` props. We also display web search icon in our button using the `icon` props. See the list of supported icons in https://oss.callstack.com/react-native-paper/docs/guides/icons.
 
-```jsx title="GitExplorer.js"
+```tsx title="GitExplorer.tsx"
 import { useState } from 'react';
 // highlight-next-line
 import { Button, TextInput } from 'react-native-paper';
 import { StyleSheet, View } from 'react-native';
 
+type Repository = {
+  id: number;
+  full_name: string;
+  description: string | null;
+};
+
 export default function GitExplorer() {
   const [keyword, setKeyword] = useState('');
-  const [repositories, setRepositories] = useState([]);
+  const [repositories, setRepositories] = useState<Repository[]>([]);
 
   return (
     <View style={styles.container}>
@@ -158,7 +169,7 @@ In this phase, your app should look like the image below:
 #### Fetch
 Next, we implement the network request to fetch repositories. Add the following function in your `GitExplorer` component.
 
-```js
+```ts
 const handleFetch = () => {
   fetch(`https://api.github.com/search/repositories?q=${keyword}`)
   .then(response => {
@@ -174,7 +185,7 @@ const handleFetch = () => {
 
 The `handleFetch` function is executed when the button is pressed.
 
-```jsx title="GitExplorer.js"
+```tsx title="GitExplorer.tsx"
   return (
     <View style={styles.container}>
       <TextInput
@@ -191,13 +202,12 @@ The `handleFetch` function is executed when the button is pressed.
   );
 
 ```
-
 #### Flatlist & Card
 Then we display repositories using the React Native `FlatList` component. Now, each row is displayed using React Native Paper `Card` component (https://oss.callstack.com/react-native-paper/docs/components/Card/). To show text we use React Native Paper `Text` component that provides pre-defined text styles. You can see all styles in https://oss.callstack.com/react-native-paper/docs/components/Text/.
 
 First, Import required component:
 
-```js title="GitExplore.js"
+```ts title="GitExplore.tsx"
 import { useState } from 'react';
 import { Button, TextInput, Card, Text } from 'react-native-paper'; // Import Card and Text
 import { StyleSheet, View, FlatList } from 'react-native'; // Import FlatList
@@ -205,7 +215,7 @@ import { StyleSheet, View, FlatList } from 'react-native'; // Import FlatList
 ```
 Then render `FlatList` component:
 
-```jsx title="GitExplorer.js"
+```tsx title="GitExplorer.tsx"
   return (
     <View style={styles.container}>
       <TextInput
@@ -241,7 +251,7 @@ You can use React Native Paper `List` components also to display list tiles. You
 #### Web Browser
 Next, we implement the feature that user can browse the github site from the list. We use `Card.Action` component to show a button inside the `Card` component. We use `IconButton` component which displays only an icon without a label. When the button is pressed, we call `handleBrowse` function and pass repository url as an argument.
 
-```jsx title="GitExplore.js"
+```tsx title="GitExplore.tsx"
 // Import IconButton from react-native-paper
 
 renderItem={({item}) => 
@@ -261,14 +271,13 @@ Then, we implement the `handleBrowse` function that opens device browser and nav
 ```bash
 npx expo install expo-web-browser
 ```
-
 Import `WebBrowser`:
-```js title="GitExplorer.js"
+```ts title="GitExplorer.tsx"
 import * as WebBrowser from 'expo-web-browser';
 ```
 The `handleBrowse` is an asynchronous function declared using the `async` keyword. It takes a parameter url, which represents the URL of the repository to browse. The `openBrowserAsync` function opens the default web browser on the device and opens the provided URL:
-```js title="GitExplorer.js"
-const handleBrowse = async (url) => {
+```ts title="GitExplorer.tsx"
+const handleBrowse = async (url: string) => {
   try {
     let result = await WebBrowser.openBrowserAsync(url);
   } catch (error) {
@@ -283,13 +292,13 @@ In the final step, we implement loading indicator. The React Native `Button` com
 
 First, we create a new state `loading` that is used to control whether a loading indicator should be displayed on the search button. When the component first renders, there are no ongoing loading operations; therefore, the `loading` state intial value is `false`. 
 
-```js title="GitExplore.js"
+```ts title="GitExplore.tsx"
 const [loading, setLoading] = useState(false);
 ```
 
 When `handleFetch` function is called, we set `loading` state to `true`. This indicates that a loading operation is in progress and loading indicator should be visible. When the response from the API is received or an error occurs, the `loading` state is set back to `false`. This indicates that the fetch operation has completed, and the loading indicator should dissapear.
 
-```js title="GitExplore.js"
+```ts title="GitExplore.tsx"
 const handleFetch = () => {
   // highlight-next-line
   setLoading(true);
@@ -310,10 +319,14 @@ const handleFetch = () => {
 ```
 In the Search button the loading prop is passed as `loading={loading}`, meaning it takes the value of the `loading` state defined in the component's state.
 
-```jsx title="GitExplore.js"
-<Button loading={loading} mode="contained" icon="search-web" onPress={handleFetch}>
+```tsx title="GitExplore.tsx"
+<Button 
+  loading={loading} 
+  mode="contained" 
+  icon="search-web" 
+  onPress={handleFetch}
+>
   Search
 </Button>  
 ```
-
 Now when type a keyword and press Search button, you should see the loading indicator inside the button.
