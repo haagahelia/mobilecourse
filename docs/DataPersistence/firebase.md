@@ -19,10 +19,10 @@ Next, we will implement a simple Shopping list app where users can enter product
 ![](img/shoppinglist.png)
 
 #### Create Expo project
-Create a new Expo project and install Firebase JavaScript SDK.
+Create a new Expo project and name it shoppinglist. Install Firebase JavaScript SDK.
 
 ```bash
-npx create-expo-app shoppinglist
+npx create-expo-app@latest --template blank-typescript
 cd shoppinglist
 npx expo install firebase
 ```
@@ -32,7 +32,7 @@ To use Firebase, we have to create a project in Firebase.
 
 1. Sign up to Firebase (https://firebase.google.com/).
 
-2. Create a new Firebase project and create new realtime database (Build menu).
+2. Create a new Firebase project and create new realtime database (Databases & Storages).
 
 ![](img/firebase_app.png) 
 
