@@ -101,7 +101,7 @@ You can also use tagged template literals: https://docs.expo.dev/versions/latest
 ```ts
 const handleSave = async () => {
   try {
-    await db.runAsync`INSERT INTO course (title, credits) VALUES (${title}, ${credit})`;
+    await db.sql`INSERT INTO course (title, credits) VALUES (${title}, ${credit})`;
     // Todo: update the course list
   } catch (error) {
     console.error('Could not add item', error);
