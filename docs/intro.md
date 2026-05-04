@@ -22,7 +22,7 @@ Throughout this course, you'll learn how to:
 
 #### Prerequisites
 
-As mentioned earlier, prior knowledge of React is required for this course. If you're not already familiar with React, we recommend taking our Front End Programming course first, where you'll get knowledge of React fundamentals.
+As mentioned earlier, prior knowledge of React and TypeScript is required for this course. If you're not already familiar with React, we recommend taking our Front End Programming course first, where you'll get knowledge of React fundamentals.
 
 #### Contribute to course material
 We value your insights and contributions, and we invite you to actively participate in shaping the course content. Your contributions can make a significant impact on the overall quality of our material. Whether you've fin typo, have a suggestion for clarification, or want to add valuable content, we welcome your input!
