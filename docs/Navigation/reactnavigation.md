@@ -163,24 +163,21 @@ Next, we'll add icons to our tab navigation bar by utilizing the `screenOptions`
 <NavigationContainer>
   <Tab.Navigator
     screenOptions={({ route }) => ({  // Navigator can be customized using screenOptions
-          tabBarIcon: ({ focused, color, size }) => { 
-            // Function tabBarIcon is given the focused state,
-	    // color and size params
-            let iconName;
+      tabBarIcon: ({ color, size }) => { 
+        let iconName: 'home' | 'settings' = 'home';
+            
+        if (route.name === 'Settings') {
+          iconName = 'settings';
+        }
 
-            if (route.name === 'Home') {
-              iconName = 'home';
-            } else if (route.name === 'Settings') {
-              iconName = 'settings';
-            }
-
-            return <Ionicons name={iconName} size={size} color={color} />;   //it returns an icon component
-          },
-        })}>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Settings" component={SettingScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
+        return <Ionicons name={iconName} size={size} color={color} />;   //it returns an icon component
+      },
+    })}
+  >
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Settings" component={SettingScreen} />
+  </Tab.Navigator>
+</NavigationContainer>
 
 ```
 ### Stack Navigation
