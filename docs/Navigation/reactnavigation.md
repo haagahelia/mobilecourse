@@ -161,23 +161,25 @@ Then, you can render an icon. The `name` props defines what icon to display. You
 Next, we'll add icons to our tab navigation bar by utilizing the `screenOptions` property of the `Navigator` component.
 ```tsx
 <NavigationContainer>
-  <Tab.Navigator
-    screenOptions={({ route }) => ({  // Navigator can be customized using screenOptions
-      tabBarIcon: ({ color, size }) => { 
-        let iconName: 'home' | 'settings' = 'home';
-            
-        if (route.name === 'Settings') {
-          iconName = 'settings';
-        }
-
-        return <Ionicons name={iconName} size={size} color={color} />;   //it returns an icon component
-      },
-    })}
-  >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Settings" component={SettingScreen} />
-  </Tab.Navigator>
-</NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen 
+          name="Home" 
+          component={HomeScreen} 
+          options={{ 
+            tabBarLabel: 'Home',
+            tabBarIcon: ({ size, color }) =>  <Ionicons name={'home'} size={size} color={color} />
+          }} 
+        />
+        <Tab.Screen 
+          name="Settings" 
+          component={SettingScreen}
+          options={{
+            tabBarLabel: 'Settings',
+            tabBarIcon: ({ size, color }) =>  <Ionicons name={'settings'} size={size} color={color} />
+          }}
+        />
+      </Tab.Navigator>
+    </NavigationContainer>
 
 ```
 ### Stack Navigation
