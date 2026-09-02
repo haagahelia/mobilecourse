@@ -100,7 +100,9 @@ export default function App() {
   );
 }
 ```
-Finally, we can set-up the navigator. The `Screen` component's `name` prop defines the name that is used for screen. The name is also used to navigate to the screen. The `component` prop defines the React component to render for the screnn.
+Finally, we can set-up the navigator. 
+
+The `Screen` component's `name` prop defines the id that is used for the screen in navigation. The name is also used as the title of the screen, if the title has not been explicitly defined. The `component` prop defines the React component to render for the screen.
 
 ```jsx title="App.tsx"
 import { NavigationContainer } from '@react-navigation/native';
@@ -123,7 +125,7 @@ export default function App() {
   );
 }
 ```
-Now, we should see the bottom tab naviagtor in our app and we are able to navigate between two components.
+Now, we should see the bottom tab navigator in our app and we are able to navigate between two components.
 
 :::note
 React Navigation offers two methods for implementing routing: **static** and **dynamic**.  In this material we use the dynamic (component) method where routing is defined using components. In the static method, routing is defined  using objects. For example, the previous example look like this when using static navigation:
@@ -158,7 +160,7 @@ Then, you can render an icon. The `name` props defines what icon to display. You
 ```tsx
   <Ionicons name="home" size={32} color="red" />
 ```
-Next, we'll add icons to our tab navigation bar by utilizing the `screenOptions` property of the `Navigator` component.
+Next, we'll add icons to our tab navigation bar by defining options for the screen components.
 ```tsx
 <NavigationContainer>
       <Tab.Navigator>
