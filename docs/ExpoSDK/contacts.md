@@ -14,7 +14,7 @@ First, we have to import the `Contact` class, `ContactsSortOrder` and `ContactFi
 import * as Contacts from 'expo-contacts';
 import { Contact, ContactField, ContactsSortOrder } from 'expo-contacts';
 ```
-Next, we check permission to be able to access the device’s contacts. The  `requestPermissionsAsync()` function is called to request permission to access the contacts on the user's device. It returns a promise that resolves to a `PermissionResponse` object. We destruct the resolved object to extract the `status` property.
+Next, we check permission to be able to access the device’s contacts. The `requestPermissionsAsync()` function is called to request permission to access the contacts on the user's device. It returns a promise that resolves to `PermissionResponse` object. We destruct the resolved object to extract the `status` property.
 ```ts
 const { status } = await Contacts.requestPermissionsAsync();
 ```
