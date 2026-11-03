@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkmobilecourse||=[]).push([[8913],{8913(s,e,u){u.r(e)}}]);
