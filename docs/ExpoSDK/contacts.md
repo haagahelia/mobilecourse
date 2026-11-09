@@ -16,11 +16,11 @@ import { Contact, ContactField, ContactsSortOrder } from 'expo-contacts';
 ```
 Next, we check permission to be able to access the device’s contacts. The `requestPermissionsAsync()` function is called to request permission to access the contacts on the user's device. It returns a promise that resolves to `PermissionResponse` object. We destruct the resolved object to extract the `status` property.
 ```ts
-const { status } = await Contacts.requestPermissionsAsync();
+const { granted } = await Contacts.requestPermissionsAsync();
 ```
-The value of `status` is `granted` if user has granted the permission. 
+The value `granted` is `true` if user has granted the permission. 
 ```ts
-if (status === 'granted') {
+if (granted) {
   // Access contacts 
 }
 ```
@@ -75,14 +75,15 @@ Object {
 Now we can fetch the contacts, get the details of each contact and store them in the state. If a contact has no phone number, we use the text `No number`.
 ```ts
 const getContacts = async () => {
-  const { status } = await Contacts.requestPermissionsAsync();
-  if (status !== 'granted') {
+  const { granted } = await Contacts.requestPermissionsAsync();
+  
+  if (!granted) {
     Alert.alert('Permission denied', 'Cannot access contacts.');
     return;
   }
 
   const result = await Contact.getAll({
-    limit: 20,
+    limit: 5,
     sortOrder: ContactsSortOrder.FamilyName,
   });
 
@@ -96,10 +97,11 @@ const getContacts = async () => {
       };
     })
   );
+
   setContacts(items);
 };
 ```
-`Promise.all` waits until the details of all contacts are fetched, and it keeps the order of the contacts.
+Each `getDetails()` call returns a `Promise`, which represents a result that will be available later. `Promise.all` waits until every contact's details have been fetched, then provides all the results together in an array. The results stay in the same order as the contacts in `result`, even if some contacts' details finish loading sooner than others.
 
 In the `return` statement, we add `FlatList` and `Button`. The button executes the `getContacts` function.
 ```tsx
@@ -110,15 +112,19 @@ return (
       data={contacts}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
-        <Text>{item.name}, {item.number}</Text>
+        <View>
+          <Text>Name: {item.name}</Text>
+          <Text>Phone: {item.number}</Text>
+        </View>
       )}
     />
     <Button title="Get Contacts" onPress={getContacts} />
   </View>
 );
 ```
-UPDATE IMAGE
-![](img/contacts.png)
+![](img/contacts2.png)
+
+Besides retrieving contacts, Expo Contacts lets you create, edit, and remove contacts, update details like phone numbers. See the examples in https://docs.expo.dev/versions/latest/sdk/contacts/#usage.
 
 #### getAllDetails
 `getAll` creates a `Contact` instance for every contact and then needs one `getDetails` call per contact. `Contact.getAllDetails(fields, options)` is an  alternative. It fetches the chosen fields of all matching contacts with a single call, and it accepts the same options.
@@ -135,5 +141,4 @@ setContacts(result.map((details) => ({
 })));
 ```
 It is better to use `getAllDetails` when you only need the data to show it in a list. Use `getAll` when you need the `Contact` instance later, e.g. to edit the contact with `contact.patch()`.
-
 
