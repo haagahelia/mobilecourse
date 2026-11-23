@@ -7,61 +7,49 @@ EXPO Contacts (https://docs.expo.dev/versions/latest/sdk/contacts/) can be used 
 ```bash
 npx expo install expo-contacts 
 ```
-In the following example, we create an app that fetch phone number from the contacts and send sms message to this number.
+In the following example, we create an app that fetches the first 20 contacts sorted by last name and shows their full name and phone number in a `FlatList`.
 
-First, we have to import the `expo-contacts`:
+First, we have to import the `Contact` class, `ContactsSortOrder` and `ContactField` from `expo-contacts`. We also import `Contacts` for requesting the permission:
 ```ts
 import * as Contacts from 'expo-contacts';
+import { Contact, ContactField, ContactsSortOrder } from 'expo-contacts';
 ```
-Next, we check permission to be able to access the device’s contacts. The  `requestPermissionsAsync()` function is called to request permission to access the contacts on the user's device. It returns a promise that resolves to a `PermissionResponse` object. We destruct the resolved object to extract the `status` property.
+Next, we check permission to be able to access the device’s contacts. The `requestPermissionsAsync()` function is called to request permission to access the contacts on the user's device. It returns a promise that resolves to `PermissionResponse` object. We destruct the resolved object to extract the `status` property.
 ```ts
-const { status } = await Contacts.requestPermissionsAsync();
+const { granted } = await Contacts.requestPermissionsAsync();
 ```
-The value of `status` is `granted` if user has granted the permission. 
+The value `granted` is `true` if user has granted the permission. 
 ```ts
-if (status === 'granted') {
+if (granted) {
   // Access contacts 
 }
 ```
-The `getContactsAsync(query)` method is used to get contacts from your device and it is asynchronous. The `query` is an optional object that can contain properties to filter and sort the contacts. The `getContactsAsync` method returns a promise that resolves to a `ContactResponse` object. The object contains `data` property that is an array of contacts that match a given query.
+The static `Contact.getAll(options)` method is used to get contacts from your device and it is asynchronous. The `options` is an optional object that can be used to limit, sort and filter the contacts. It returns a promise that resolves to an array of `Contact` instances.
+
+* `limit` – maximum number of contacts to return
+* `offset` – number of contacts to skip (useful for paging)
+* `sortOrder` – sort order, e.g. `ContactsSortOrder.FamilyName`
+* `name` – return only contacts whose name contains the given string
+
 ```ts
-const getContacts = async () => {
-  const { status } = await Contacts.requestPermissionsAsync();
-  if (status === 'granted') {
-    const { data } = await Contacts.getContactsAsync(
-      { fields: [Contacts.Fields.PhoneNumbers] }
-    );
-   }
-}
+const contacts = await Contact.getAll({
+  limit: 20,
+  sortOrder: ContactsSortOrder.FamilyName,
+});
 ```
-In the `query`, we specify that we want to retrieve phone numbers. You can also use `Contacts.Fields.Emails` to fetch email addresses. We then check whether any contacts are available and store the first contact object in a state.
-
-To store the contact, we create a state. The `expo-contacts` library provides a `Contact` type that describes the shape of a contact object:
+A `Contact` instance does not contain the contact data itself. The data is fetched with asynchronous methods. The `getDetails(fields)` method fetches the listed fields of one contact. We need the full name and the phone numbers:
 ```ts
-// import Contact type
-import type { Contact } from 'expo-contacts';
-
-// Create state to store contact
-const [contact, setContact] = useState<Contact>({});
+const details = await contact.getDetails([ContactField.FULL_NAME, ContactField.PHONES]);
 ```
-Store the first contact to `contact` state:
+We create a type and a state for the data shown in the list:
 ```ts
-const getContacts = async () => {
-  const { status } = await Contacts.requestPermissionsAsync();
-  if (status === 'granted') {
-    const { data } = await Contacts.getContactsAsync(
-      { fields: [Contacts.Fields.PhoneNumbers] }
-    );
+type ContactItem = {
+  id: string;
+  name: string;
+  number: string;
+};
 
-    if (data.length > 0) {
-      setContact(data[0]);
-    }
-    else {
-      Alert.alert("Warning", "No contacts found.");      
-    }
-  }
-}
-
+const [contacts, setContacts] = useState<ContactItem[]>([]);
 ```
 Contact object looks the following (Android)
 ```ts
@@ -84,68 +72,73 @@ Object {
   ],
 }
 ```
-In the `return` statement, we add the `Button` and `Text` components. The button execute the `getContacts` function and the name of the first contact is displayed in the `Text` component.
+Now we can fetch the contacts, get the details of each contact and store them in the state. If a contact has no phone number, we use the text `No number`.
+```ts
+const getContacts = async () => {
+  const { granted } = await Contacts.requestPermissionsAsync();
+  
+  if (!granted) {
+    Alert.alert('Permission denied', 'Cannot access contacts.');
+    return;
+  }
 
+  const result = await Contact.getAll({
+    limit: 5,
+    sortOrder: ContactsSortOrder.FamilyName,
+  });
+
+  const items = await Promise.all(
+    result.map(async (contact) => {
+      const details = await contact.getDetails([ContactField.FULL_NAME, ContactField.PHONES]);
+      return {
+        id: contact.id,
+        name: details.fullName ?? 'No name',
+        number: details.phones[0]?.number ?? 'No number',
+      };
+    })
+  );
+
+  setContacts(items);
+};
+```
+Each `getDetails()` call returns a `Promise`, which represents a result that will be available later. `Promise.all` waits until every contact's details have been fetched, then provides all the results together in an array. The results stay in the same order as the contacts in `result`, even if some contacts' details finish loading sooner than others.
+
+In the `return` statement, we add `FlatList` and `Button`. The button executes the `getContacts` function.
 ```tsx
 return (
   <View style={styles.container}>
-    <Text>{contact.name}</Text>
-    <Button title="Get Contact" onPress={getContacts} />
+    <FlatList
+      style={{ marginTop: 50 }}
+      data={contacts}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => (
+        <View>
+          <Text>Name: {item.name}</Text>
+          <Text>Phone: {item.number}</Text>
+        </View>
+      )}
+    />
+    <Button title="Get Contacts" onPress={getContacts} />
   </View>
 );
 ```
-Now, You should see the first contact’s name when you press the button.
+![](img/contacts2.png)
 
-![](img/contacts.png)
+Besides retrieving contacts, Expo Contacts lets you create, edit, and remove contacts, update details like phone numbers. See the examples in https://docs.expo.dev/versions/latest/sdk/contacts/#usage.
 
-### EXPO SMS
-EXPO SMS (https://docs.expo.dev/versions/latest/sdk/sms/) can be used to get access to device’s SMS messages. You can install it by typing the following command in your app directory.
-```bash
-npx expo install expo-sms 
-```
-After installing the package, import `expo-sms` into `App.tsx`:
+#### getAllDetails
+`getAll` creates a `Contact` instance for every contact and then needs one `getDetails` call per contact. `Contact.getAllDetails(fields, options)` is an  alternative. It fetches the chosen fields of all matching contacts with a single call, and it accepts the same options.
 ```ts
-import * as SMS from 'expo-sms';
-```
-Next, we will implement function to send SMS message to the contact.
-The `isAvailableAsync()` method can be used to check if SMS is available in a device.
-
-```ts
-const sendSms = async () => {
-  const isSMSAvailable = await SMS.isAvailableAsync();
-  
-  if (isSMSAvailable) {
-    // Send a message
-  }
-}
-```
-The SMS message can be sent using the `sendSMSAsync(addresses, message, options)` method. The first argument is an array of phone numbers and the second argument is a message to be sent. The third optional argument can be used to define additional SMS configuration options. The `sendSMSAsync`returns a promise that resolves to an object containing the result of the SMS sending operation (sent, cancelled, unknown). 
-```ts
-const sendSms = async () => {
-  const isSMSAvailable = await SMS.isAvailableAsync();
-    
-  const phoneNumber = contact.phoneNumbers?.[0]?.number;
-  if (!phoneNumber) {
-    Alert.alert("Warning", "No phone number available.");
-    return;
-  }
-  if (isSMSAvailable) {
-    const { result } = await SMS.sendSMSAsync([phoneNumber], 'Hello ' + contact.name);
-  }
-}
-```
-Before sending the SMS, we validate that the selected contact has a phone number. If `contact.phoneNumbers?.[0]?.number` exists, we claa `sendSMSAsync`. If it does not exist, we show an alert and return early. This prevents trying to send an SMS to an undefined number.
-
-Finally, we add a button to send SMS message.
-```ts
-return (
-  <View style={styles.container}>
-    <Text>{contact.name}</Text>
-    <Button title="Get Contact" onPress={getContacts} />
-    <Button title="Send SMS" onPress={sendSms} />
-  </View>
+const result = await Contact.getAllDetails(
+  [ContactField.FULL_NAME, ContactField.PHONES],
+  { limit: 20, sortOrder: ContactsSortOrder.FamilyName }
 );
-```
 
-![](img/sms.png)
+setContacts(result.map((details) => ({
+  id: details.id,
+  name: details.fullName ?? 'No name',
+  number: details.phones[0]?.number ?? 'No number',
+})));
+```
+It is better to use `getAllDetails` when you only need the data to show it in a list. Use `getAll` when you need the `Contact` instance later, e.g. to edit the contact with `contact.patch()`.
 
